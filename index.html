@@ -12,6 +12,7 @@
       --brand-blue: #009CDE;
       --brand-blue-dark: #007ab3;
       --brand-black: #000000;
+      --nav-btn: #000000;
       --bg: #f7f7f5;
       --surface: #ffffff;
       --text: #111111;
@@ -21,6 +22,7 @@
       --tag-text: #333;
     }
     html.dark {
+      --nav-btn: #1e1e1e;
       --bg: #111111;
       --surface: #1c1c1c;
       --text: #f0f0ee;
@@ -34,7 +36,7 @@
     body { font-family: 'IBM Plex Sans', sans-serif; background-color: var(--bg); color: var(--text); transition: background-color 0.3s, color 0.3s; min-height: 100vh; }
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
-    header { padding: 2rem 0 0; }
+    header { padding: 2rem 0; }
     .header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem; }
     .header-name h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 0.75rem; }
     .header-name h1 span { color: var(--brand-blue); }
@@ -58,12 +60,14 @@
     .header-links svg { width: 1rem; height: 1rem; flex-shrink: 0; }
     .header-nav-bar { border-top: 2px solid var(--brand-black); padding: 1.25rem 0; }
     nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    nav a { display: inline-block; padding: 0.65rem 2rem; background: var(--brand-black); color: #fff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
+    nav a { display: inline-block; padding: 0.65rem 2rem; background: var(--nav-btn); color: #fff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
     nav a:hover { background: var(--brand-blue); }
-    section { padding: 2.5rem 0; }
+    section { padding: 4rem 0; border-top: 1px solid var(--border); }
     .section-label { font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--brand-blue); margin-bottom: 1.5rem; }
+    .section-sublink { display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--brand-blue); margin-bottom: 1.75rem; transition: color 0.2s; }
+    .section-sublink:hover { color: var(--brand-blue-dark); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .about-grid h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--brand-blue); text-transform: uppercase; letter-spacing: 0.03em; }
+    .about-heading { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 0.75rem; }
     .about-grid p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 0.75rem; }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
     .project-card { background: var(--surface); padding: 2rem; border: 1px solid var(--border); transition: box-shadow 0.25s, border-color 0.25s, background 0.3s; }
@@ -72,10 +76,11 @@
     .project-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
     .project-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
-    .tag { padding: 0.2rem 0.7rem; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: var(--brand-blue); color: #fff; }
-    .project-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 700; color: var(--brand-blue); transition: gap 0.2s, color 0.2s; }
-    .project-link:hover { color: var(--brand-blue-dark); gap: 0.7rem; }
-    .project-link svg { width: 1rem; height: 1rem; }
+    .tag { padding: 0.2rem 0.7rem; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: var(--tag-bg); color: var(--brand-blue); border: 1px solid var(--brand-blue); }
+    .project-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 700; color: var(--brand-blue); transition: color 0.2s; }
+    .project-link:hover { color: var(--brand-blue-dark); }
+    .project-link svg { width: 1rem; height: 1rem; transition: transform 0.2s; }
+    .project-link:hover svg { transform: translateX(4px); }
     .resume-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
     .resume-col-wide { grid-column: span 2; }
     .resume-section-title { display: flex; align-items: center; gap: 0.6rem; font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--brand-blue); margin-bottom: 1.25rem; }
@@ -144,7 +149,7 @@
             <button id="themeToggle">
               <svg id="iconSun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
               <svg id="iconMoon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-              <span id="modeLabel">Light Mode</span>
+              <span id="modeLabel">Dark Mode</span>
             </button>
           </div>
           <div class="header-links">
@@ -152,11 +157,11 @@
               <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               mateomcdermott@gmail.com
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/mateomcdermott/" target="_blank" rel="noopener noreferrer">
               <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               LinkedIn ↗
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/projects" target="_blank" rel="noopener noreferrer">
               <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               GitHub ↗
             </a>
@@ -167,7 +172,7 @@
         <nav>
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
-          <a href="#photography">Photography</a>
+          <a href="#resume">Resume</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
@@ -176,15 +181,16 @@
 
   <section id="about">
     <div class="container">
+      <h2 class="section-label">About</h2>
       <div class="about-grid">
         <div>
-          <h2>About</h2>
+          <h3 class="about-heading">Who I Am</h3>
           <p>I'm a biomedical engineer and business analyst with a passion for developing innovative healthcare technologies and data-driven solutions.</p>
           <p>My expertise lies at the intersection of engineering, technology, and business strategy, where I help organizations transform complex data into actionable insights.</p>
           <p>Based in Boston, MA, I work on projects ranging from medical device development to enterprise analytics systems, always focusing on creating meaningful impact through technology.</p>
         </div>
         <div>
-          <h2>Background</h2>
+          <h3 class="about-heading">Background</h3>
           <p>My work spans academic research at Virginia Tech, where I contributed to cutting-edge neuroimaging projects, to enterprise-level business systems analysis.</p>
           <p>I specialize in Power BI dashboard development, data visualization, and creating scalable analytics solutions that drive business decisions.</p>
           <p>Through my engineering background and technical expertise, I bring a unique perspective to solving complex problems in healthcare technology and business intelligence.</p>
@@ -195,27 +201,28 @@
 
   <section id="projects">
     <div class="container">
-      <h2 class="section-label">Projects</h2>
+      <h2 class="section-label">Highlighted Projects</h2>
+      <a href="#" class="section-sublink">View all projects →</a>
       <div class="projects-grid">
         <div class="project-card">
           <div class="project-year">2026</div>
           <h3 class="project-title">OPM-MEG Infant Helmet</h3>
           <p class="project-desc">A wearable neuroimaging helmet enabling the first-ever OPM-MEG data collection in awake, behaving infants.</p>
-          <div class="tags"><span class="tag">Neuroscience</span><span class="tag">Biomedical</span><span class="tag">Research</span></div>
+          <div class="tags"><span class="tag">SolidWorks (CAD)</span><span class="tag">Neurodevelopment Research</span><span class="tag">Medical Device Product Design</span><span class="tag">V&amp;V</span><span class="tag">Python</span><span class="tag">VBA</span><span class="tag">GD&amp;T</span></div>
+          <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="project-card">
+          <div class="project-year">2026</div>
+          <h3 class="project-title">Financial Dashboard</h3>
+          <p class="project-desc">Built a personal Power BI dashboard consolidating credit card, Venmo, and bank data for budget vs. actuals tracking — fully customizable, no subscription required.</p>
+          <div class="tags"><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Data Analytics</span><span class="tag">Data Visualization</span></div>
           <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="project-card">
           <div class="project-year">2023</div>
           <h3 class="project-title">Low-Cost Pediatric Prosthetics</h3>
-          <p class="project-desc">Affordable 3D-printed prosthetic limbs for children in Blacksburg, Virginia, built with a Virginia Tech engineering team.</p>
-          <div class="tags"><span class="tag">3D Printing</span><span class="tag">Prosthetics</span><span class="tag">Engineering</span></div>
-          <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </div>
-        <div class="project-card">
-          <div class="project-year">2024</div>
-          <h3 class="project-title">Financial Dashboard</h3>
-          <p class="project-desc">An interactive Power BI dashboard for real-time financial data visualization and business analytics.</p>
-          <div class="tags"><span class="tag">Power BI</span><span class="tag">Analytics</span><span class="tag">Data Viz</span></div>
+          <p class="project-desc">As President of the VT e-NABLE chapter, led 70+ volunteers fabricating free 3D-printed prosthetics for children with limb differences — helping kids play, compete in sports, and live more independently.</p>
+          <div class="tags"><span class="tag">Prosthetic Development</span><span class="tag">Leadership</span><span class="tag">Team Management</span><span class="tag">Community Outreach</span><span class="tag">Human Factors Engineering</span></div>
           <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
@@ -224,6 +231,7 @@
 
   <section id="resume">
     <div class="container">
+      <h2 class="section-label">Resume</h2>
       <div class="resume-grid">
         <div class="resume-col-wide">
           <div class="resume-section-title">
@@ -289,11 +297,11 @@
               <span class="link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
               mateomcdermott@gmail.com
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <a href="https://www.linkedin.com/in/mateomcdermott/" target="_blank" rel="noopener noreferrer" class="contact-link">
               <span class="link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
               LinkedIn ↗
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <a href="https://github.com/projects" target="_blank" rel="noopener noreferrer" class="contact-link">
               <span class="link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
               GitHub ↗
             </a>
@@ -318,7 +326,7 @@
           </div>
           <button type="submit" class="submit-btn" id="submitBtn">
             <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send Message
+            <span id="submitLabel">Send Message</span>
           </button>
           <p class="form-success" id="formSuccess">Thanks! I'll get back to you soon.</p>
         </form>
@@ -340,16 +348,15 @@
         document.documentElement.classList.toggle('dark', dark);
         document.getElementById('iconSun').style.display = dark ? 'none' : '';
         document.getElementById('iconMoon').style.display = dark ? '' : 'none';
-        document.getElementById('modeLabel').textContent = dark ? 'Dark Mode' : 'Light Mode';
+        document.getElementById('modeLabel').textContent = dark ? 'Light Mode' : 'Dark Mode';
       };
       document.getElementById('contactForm').onsubmit = function(e) {
         e.preventDefault();
-        document.getElementById('submitBtn').textContent = 'Message Sent!';
+        document.getElementById('submitLabel').textContent = 'Message Sent!';
         document.getElementById('formSuccess').style.display = 'block';
         this.reset();
-        var self = this;
         setTimeout(function() {
-          document.getElementById('submitBtn').textContent = 'Send Message';
+          document.getElementById('submitLabel').textContent = 'Send Message';
           document.getElementById('formSuccess').style.display = 'none';
         }, 4000);
       };
