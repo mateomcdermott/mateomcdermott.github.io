@@ -34,6 +34,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body { font-family: 'IBM Plex Sans', sans-serif; background-color: var(--bg); color: var(--text); transition: background-color 0.3s, color 0.3s; min-height: 100vh; }
+    @keyframes pageFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    body.page-enter { animation: pageFadeIn 0.35s ease both; }
+    body.page-exit { opacity: 0; transform: translateY(-6px); transition: opacity 0.2s ease, transform 0.2s ease; }
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
     header { padding: 2rem 0; }
@@ -58,10 +61,10 @@
     .header-links a { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
     .header-links a:hover { color: var(--brand-blue); }
     .header-links svg { width: 1rem; height: 1rem; flex-shrink: 0; }
-    .header-nav-bar { border-top: 2px solid var(--brand-black); padding: 1.25rem 0; }
+    .header-nav-bar { border-top: 1px solid var(--border); padding: 1.25rem 0; }
     nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     nav a { display: inline-block; padding: 0.65rem 2rem; background: var(--nav-btn); color: #fff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
-    nav a:hover { background: var(--brand-blue); }
+    nav a:hover, nav a.active { background: var(--brand-blue); }
     section { padding: 4rem 0; border-top: 1px solid var(--border); }
     .section-label { font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--brand-blue); margin-bottom: 1.5rem; }
     .section-sublink { display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--brand-blue); margin-bottom: 1.75rem; transition: color 0.2s; }
@@ -170,7 +173,8 @@
       </div>
       <div class="header-nav-bar">
         <nav>
-          <a href="#about">About</a>
+          <a href="index.html" class="active">Home</a>
+          <a href="about.html">About</a>
           <a href="#projects">Projects</a>
           <a href="#resume">Resume</a>
           <a href="#contact">Contact</a>
@@ -342,13 +346,32 @@
 
   <script>
     (function() {
-      var dark = false;
-      document.getElementById('themeToggle').onclick = function() {
-        dark = !dark;
+      document.body.classList.add('page-enter');
+      document.querySelectorAll('nav a').forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.classList.remove('page-enter');
+            document.body.classList.add('page-exit');
+            setTimeout(function() { window.location.href = href; }, 200);
+          });
+        }
+      });
+    })();
+    (function() {
+      var dark = localStorage.getItem('theme') === 'dark';
+      function applyTheme() {
         document.documentElement.classList.toggle('dark', dark);
         document.getElementById('iconSun').style.display = dark ? 'none' : '';
         document.getElementById('iconMoon').style.display = dark ? '' : 'none';
         document.getElementById('modeLabel').textContent = dark ? 'Light Mode' : 'Dark Mode';
+      }
+      applyTheme();
+      document.getElementById('themeToggle').onclick = function() {
+        dark = !dark;
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+        applyTheme();
       };
       document.getElementById('contactForm').onsubmit = function(e) {
         e.preventDefault();
