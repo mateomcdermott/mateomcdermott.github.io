@@ -68,6 +68,31 @@
     .stat-number { font-size: 1.75rem; font-weight: 700; color: var(--brand-blue); font-family: 'IBM Plex Mono', monospace; line-height: 1; }
     .stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
 
+    /* ── Project cards ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--surface); padding: 2rem; border: 1px solid var(--border); transition: box-shadow 0.25s, border-color 0.25s, background 0.3s; }
+    .project-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-color: var(--brand-blue); }
+    .project-year { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; font-family: 'IBM Plex Mono', monospace; }
+    .project-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
+    .project-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; }
+    /* ── Patent / IP ── */
+    .patent-item { border-left: 2px solid var(--brand-blue); padding-left: 1.25rem; margin-bottom: 1.25rem; }
+    .patent-item:last-child { margin-bottom: 0; }
+    .patent-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+    .patent-name { font-weight: 700; font-size: 0.95rem; }
+    .patent-number { font-size: 0.75rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+    .patent-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+    .ip-icon { width: 1.4rem; height: 1.4rem; flex-shrink: 0; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .tag { padding: 0.2rem 0.7rem; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: var(--tag-bg); color: var(--brand-blue); border: 1px solid var(--brand-blue); }
+    .project-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 700; color: var(--brand-blue); transition: color 0.2s; }
+    .project-link:hover { color: var(--brand-blue-dark); }
+    .project-link svg { width: 1rem; height: 1rem; transition: transform 0.2s; }
+    .project-link:hover svg { transform: translateX(4px); }
+    .section-sublink { display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--brand-blue); margin-bottom: 1.75rem; transition: color 0.2s; }
+    .section-sublink:hover { color: var(--brand-blue-dark); }
+
     /* ── Story sections ── */
     .story-section { padding: 4rem 0; border-top: 1px solid var(--border); }
     .section-label { font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--brand-blue); margin-bottom: 2rem; }
@@ -173,9 +198,11 @@
       .about-hero { padding: 2rem 0; }
       .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
       .hero-img-wrap { max-width: 100%; }
-      .hero-img-wrap img { aspect-ratio: 3/4; object-position: top; max-height: 70vh; }
+      .hero-img-wrap img { aspect-ratio: 3/4; object-position: top; max-height: 50vh; }
       .hero-img-accent { display: none; }
-      .hero-stats { flex-wrap: wrap; gap: 1rem 2rem; }
+      .hero-stats { flex-wrap: nowrap; gap: 0; justify-content: space-between; }
+      .stat-number { font-size: 1.2rem; }
+      .stat-label { font-size: 0.6rem; letter-spacing: 0.06em; }
 
       /* Story sections */
       .story-section { padding: 2rem 0; }
@@ -269,6 +296,58 @@
           <p>I chose Virginia Tech for its hands-on research culture and tight-knit engineering community. From day one, I was in labs, on teams, and in competitions — learning that the best solutions come from collaboration, not isolation.</p>
           <p>After graduating in 2022, I realized that the skills that made me a good engineer — systems thinking, structured problem-solving, cross-functional communication — translated powerfully into the world of business technology. That realization sent me down a path that's been anything but linear, and I wouldn't have it any other way.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlighted Projects -->
+  <section class="story-section">
+    <div class="container">
+      <h2 class="section-label">Highlighted Projects</h2>
+      <a href="index.html#projects" class="section-sublink">View all projects <span class="sym">→</span></a>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-year">2026</div>
+          <h3 class="project-title">OPM-MEG Infant Helmet</h3>
+          <p class="project-desc">A wearable neuroimaging helmet enabling the first-ever OPM-MEG data collection in awake, behaving infants.</p>
+          <div class="tags"><span class="tag">SolidWorks (CAD)</span><span class="tag">Neurodevelopment Research</span><span class="tag">Medical Device Product Design</span><span class="tag">V&amp;V</span><span class="tag">Python</span><span class="tag">VBA</span><span class="tag">GD&amp;T</span></div>
+          <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="project-card">
+          <div class="project-year">2026</div>
+          <h3 class="project-title">Financial Dashboard</h3>
+          <p class="project-desc">Built a personal Power BI dashboard consolidating credit card, Venmo, and bank data for budget vs. actuals tracking — fully customizable, no subscription required.</p>
+          <div class="tags"><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Data Analytics</span><span class="tag">Data Visualization</span></div>
+          <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="project-card">
+          <div class="project-year">2023</div>
+          <h3 class="project-title">Low-Cost Pediatric Prosthetics</h3>
+          <p class="project-desc">As President of the VT e-NABLE chapter, led 70+ volunteers fabricating free 3D-printed prosthetics for children with limb differences — helping kids play, compete in sports, and live more independently.</p>
+          <div class="tags"><span class="tag">Prosthetic Development</span><span class="tag">Leadership</span><span class="tag">Team Management</span><span class="tag">Community Outreach</span><span class="tag">Human Factors Engineering</span></div>
+          <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intellectual Property -->
+  <section class="story-section">
+    <div class="container">
+      <h2 class="section-label">Intellectual Property</h2>
+      <div class="patent-item">
+        <div class="patent-header">
+          <div class="patent-name">Helmet System and Kit Patent</div>
+          <a class="patent-number" href="https://patents.google.com/patent/US20250295341A1/en" target="_blank" rel="noopener noreferrer" style="color:var(--brand-blue);text-decoration:underline;text-underline-offset:3px;">U.S. Patent Application No.: 19/086,230</a>
+        </div>
+        <p class="patent-desc">Co-inventor and Computer Aided Designer of the helmet used for neuroimaging infants.</p>
+      </div>
+      <div class="patent-item">
+        <div class="patent-header">
+          <div class="patent-name">Gastric Bypass Sleeve for Weight Loss</div>
+          <div class="patent-number">U.S. Provisional Patent</div>
+        </div>
+        <p class="patent-desc">Co-inventor of a duodenal-jejunal gastric bypass sleeve as a weight loss solution to treat type-2 diabetes and severe obesity.</p>
       </div>
     </div>
   </section>
@@ -463,7 +542,7 @@
         <!-- Teaching -->
         <div class="interest-row">
           <div class="interest-imgs single">
-            <img src="images/IMG_4496.jpeg" alt="Teaching" />
+            <img src="images/IMG_4496.jpeg" alt="Teaching" style="object-fit: contain; background: var(--surface);" />
           </div>
           <div class="interest-text-wrap">
             <div class="interest-label">// 07</div>
