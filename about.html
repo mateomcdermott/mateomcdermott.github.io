@@ -60,8 +60,8 @@
     .mode-toggle svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; pointer-events: none; }
     .mode-toggle span { pointer-events: none; }
     .header-links { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; }
-    .header-links a { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
-    .header-links a:hover { color: var(--brand-blue); }
+    .header-links a { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--brand-blue); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+    .header-links a:hover { color: var(--brand-blue-dark); }
     .header-links svg { width: 1rem; height: 1rem; flex-shrink: 0; }
     .header-nav-bar { border-top: 1px solid var(--border); padding: 1.25rem 0; }
     nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
@@ -95,11 +95,16 @@
     .story-text p:last-child { margin-bottom: 0; }
     .story-img img { width: 100%; display: block; object-fit: cover; }
     .story-img .img-caption { font-size: 0.72rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; margin-top: 0.6rem; }
+    .edu-item { border-left: 3px solid var(--brand-blue); padding-left: 1.5rem; margin-bottom: 1.75rem; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-degree { font-weight: 700; font-size: 0.95rem; }
+    .edu-school { font-size: 0.85rem; color: var(--brand-blue); margin-top: 0.15rem; }
+    .edu-detail { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-top: 0.4rem; }
 
     /* ── Timeline ── */
     .timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
     .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: var(--brand-blue); transform: translateX(-50%); }
-    .timeline-item { position: relative; display: grid; grid-template-columns: 1fr 5rem 1fr; align-items: start; padding-bottom: 3rem; }
+    .timeline-item { position: relative; display: grid; grid-template-columns: 1fr 10rem 1fr; align-items: start; padding-bottom: 3rem; }
     .timeline-item:last-child { padding-bottom: 0; }
     /* Center dot + date badge */
     .timeline-center { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; padding-top: 0.25rem; }
@@ -109,12 +114,22 @@
     .timeline-dot.active::before { content: ''; position: absolute; inset: -12px; border-radius: 50%; border: 1.5px solid var(--brand-blue); animation: pulse-ring 1.8s ease-out 0.4s infinite; }
     @keyframes pulse-ring { 0% { transform: scale(0.7); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
     .timeline-badge { background: var(--brand-blue); color: #fff; font-size: 0.68rem; font-weight: 700; font-family: 'IBM Plex Mono', monospace; padding: 0.25rem 0.5rem; margin-top: 0.5rem; white-space: nowrap; letter-spacing: 0.05em; }
+    .timeline-badge-gap { background: transparent; border: 1px dashed var(--brand-blue); color: var(--brand-blue); opacity: 0.55; letter-spacing: 0.18em; padding: 0.15rem 0.5rem; }
     /* Cards */
     .timeline-card { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
     .timeline-card:hover { border-color: var(--brand-blue); box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
     .timeline-role { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
     .timeline-org { font-size: 0.82rem; color: var(--brand-blue); font-weight: 600; margin-bottom: 0.75rem; }
     .timeline-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; }
+    /* Dual-period engagement blocks */
+    .ep-periods { display: flex; flex-direction: column; gap: 0; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .ep-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.4rem 0; }
+    .ep-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+    .ep-label.ep-return { color: var(--brand-blue); font-weight: 700; }
+    .ep-chip { font-size: 0.7rem; font-weight: 700; font-family: 'IBM Plex Mono', monospace; padding: 0.2rem 0.65rem; border-radius: 999px; background: var(--tag-bg); color: var(--text-muted); white-space: nowrap; }
+    .ep-chip.active { background: var(--brand-blue); color: #fff; }
+    .ep-sep { display: flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; color: var(--text-muted); opacity: 0.6; padding: 0.1rem 0; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; }
+    .ep-sep::before, .ep-sep::after { content: ''; flex: 1; height: 1px; border-top: 1px dashed var(--border); }
     /* Left card — right-aligned, connector on right */
     .timeline-left { padding-right: 1.5rem; text-align: left; }
     /* Right card — left-aligned, connector on left */
@@ -197,11 +212,11 @@
             </a>
             <a href="https://www.linkedin.com/in/mateomcdermott/" target="_blank" rel="noopener noreferrer">
               <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              LinkedIn ↗
+              LinkedIn
             </a>
             <a href="https://github.com/projects" target="_blank" rel="noopener noreferrer">
               <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              GitHub ↗
+              GitHub
             </a>
           </div>
         </div>
@@ -211,7 +226,7 @@
           <a href="index.html">Home</a>
           <a href="about.html" class="active">About</a>
           <a href="index.html#projects">Projects</a>
-          <a href="index.html#resume">Resume</a>
+          <a href="resume.html">Resume</a>
           <a href="index.html#contact">Contact</a>
         </nav>
       </div>
@@ -269,15 +284,20 @@
     <div class="container">
       <h2 class="section-label">Education</h2>
       <div class="story-block reverse">
-        <div class="story-text">
-          <h3>Virginia Tech — B.S. Biomedical Engineering, 2022</h3>
-          <p>Four years in Blacksburg shaped how I think and work. Virginia Tech's engineering program pushed me to be rigorous — but the culture pushed me to be human. I graduated with a deep foundation in biomechanics, medical device design, signal processing, and computational modeling.</p>
-          <p>Beyond the classroom, I led the VT e-NABLE chapter as President, overseeing 70+ volunteers fabricating free 3D-printed prosthetics for children with limb differences. That experience taught me more about leadership, logistics, and empathy than any lecture ever could.</p>
-          <p>I also earned my Certified Business Analysis Professional (CBAP) designation in 2023 — a credential that formalized the business skills I'd been building on the job and opened new doors in enterprise consulting.</p>
+        <div>
+          <div class="edu-item">
+            <div class="edu-degree">Bachelor of Science in Biomedical Engineering</div>
+            <div class="edu-school">Virginia Tech &nbsp;&middot;&nbsp; Blacksburg, VA &nbsp;&middot;&nbsp; 2023</div>
+            <div class="edu-detail">3.57 GPA in College of Engineering &nbsp;&middot;&nbsp; Dean's List for 4 semesters &nbsp;&middot;&nbsp; Biomedical Engineering Ambassador</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">High School Diploma</div>
+            <div class="edu-school">Newburyport High School &nbsp;&middot;&nbsp; Newburyport, MA</div>
+          </div>
         </div>
         <div class="story-img">
           <img src="images/Gradphoto.JPG" alt="Mateo and friends at Virginia Tech graduation" />
-          <p class="img-caption">// Graduation day at Virginia Tech, May 2022</p>
+          <p class="img-caption">// Graduation day at Virginia Tech, May 2023</p>
         </div>
       </div>
     </div>
@@ -294,13 +314,13 @@
           <div class="timeline-left">
             <div class="timeline-card">
               <div class="timeline-role">Senior Technology Analyst</div>
-              <div class="timeline-org">Accenture</div>
-              <p>Leading enterprise analytics and business systems modernization for Fortune 500 clients. My work centers on Power BI dashboard development, data pipeline architecture, and translating complex business requirements into scalable technical solutions.</p>
+              <div class="timeline-org">Accenture LLP</div>
+              <p>Enterprise IT consultant specializing in software verification, validation, and business systems analysis for global biopharmaceutical and life sciences clients. Delivers end-to-end test management, requirements traceability, and AI-enabled QA solutions across Salesforce and SAP implementations.</p>
             </div>
           </div>
           <div class="timeline-center">
             <div class="timeline-dot active"></div>
-            <div class="timeline-badge">2024 – Now</div>
+            <div class="timeline-badge">Sep 2023 – Present</div>
           </div>
           <div class="timeline-empty"></div>
         </div>
@@ -309,14 +329,25 @@
         <div class="timeline-item">
           <div class="timeline-empty"></div>
           <div class="timeline-center">
-            <div class="timeline-dot"></div>
-            <div class="timeline-badge">2022 – 2024</div>
+            <div class="timeline-dot active"></div>
+            <div class="timeline-badge" style="white-space:normal;text-align:center;line-height:1.9;width:160px;">Jun 2025 – Present<br><span>&amp;</span><br>Sep 2022 – May 2023</div>
           </div>
           <div class="timeline-right">
             <div class="timeline-card">
-              <div class="timeline-role">Business Systems Analyst</div>
-              <div class="timeline-org">MathWorks</div>
-              <p>Drove cross-functional requirements gathering and process improvement across global operations. Built data pipelines and reporting infrastructure that supported business decisions at scale.</p>
+              <div class="timeline-role">Research Engineer</div>
+              <div class="timeline-org">MIND Lab, Virginia Tech</div>
+              <div class="ep-periods">
+                <div class="ep-row">
+                  <span class="ep-label ep-return">↩ Called back</span>
+                  <span class="ep-chip active">Jun 2025 – Present</span>
+                </div>
+                <div class="ep-sep">invited back</div>
+                <div class="ep-row">
+                  <span class="ep-label">Initial engagement</span>
+                  <span class="ep-chip">Sep 2022 – May 2023</span>
+                </div>
+              </div>
+              <p>Biomedical design engineer for a patented OPM-MEG helmet system used in infant clinical neuroscience research. Delivered end-to-end V&amp;V, ISO 13485-compliant design documentation, and 3D-printed component validation through project completion in 2023 — then sought out by the lab to continue advancing the system in 2025, reflecting the depth of specialized expertise and institutional knowledge built over the original engagement.</p>
             </div>
           </div>
         </div>
@@ -325,16 +356,32 @@
         <div class="timeline-item">
           <div class="timeline-left">
             <div class="timeline-card">
-              <div class="timeline-role">Research Engineer</div>
-              <div class="timeline-org">Virginia Tech — Human Neuroimaging Lab</div>
-              <p>Designed and fabricated the world's first OPM-MEG infant helmet, enabling non-invasive neuroimaging in awake, behaving infants — owning the full product lifecycle from CAD to verification and validation.</p>
+              <div class="timeline-role">BioDesign Innovation Intern &amp; Senior Capstone</div>
+              <div class="timeline-org">Carilion Clinic / Virginia Tech</div>
+              <p>Conducted a clinical needs assessment at one of Virginia's largest hospitals, identifying 40+ medical device design opportunities. Engineered two high-fidelity prototypes through full design controls — from RTM and DHF documentation through lab validation and human factors testing.</p>
             </div>
           </div>
           <div class="timeline-center">
             <div class="timeline-dot"></div>
-            <div class="timeline-badge">2020 – 2022</div>
+            <div class="timeline-badge">Jun 2022 – May 2023</div>
           </div>
           <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Item 4: card on RIGHT -->
+        <div class="timeline-item">
+          <div class="timeline-empty"></div>
+          <div class="timeline-center">
+            <div class="timeline-dot"></div>
+            <div class="timeline-badge">Aug 2020 – May 2023</div>
+          </div>
+          <div class="timeline-right">
+            <div class="timeline-card">
+              <div class="timeline-role">President</div>
+              <div class="timeline-org">VT e-NABLE Chapter</div>
+              <p>Led 70+ volunteers in designing and fabricating free 3D-printed prosthetic devices for children with limb differences, enabling them to play, compete in sports, and live more independently. Grew chapter membership by 60% through outreach, industry partnerships, and fundraising.</p>
+            </div>
+          </div>
         </div>
 
       </div>

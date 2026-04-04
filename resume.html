@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume — Mateo McDermott</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand-blue: #009CDE;
+      --brand-blue-dark: #007ab3;
+      --brand-black: #000000;
+      --nav-btn: #000000;
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --text: #111111;
+      --text-muted: #6b6b6b;
+      --border: #d0d0cc;
+      --tag-bg: #e8e8e4;
+      --tag-text: #333;
+    }
+    html.dark {
+      --nav-btn: #1e1e1e;
+      --bg: #111111;
+      --surface: #1c1c1c;
+      --text: #f0f0ee;
+      --text-muted: #909090;
+      --border: #333333;
+      --tag-bg: #2a2a2a;
+      --tag-text: #ccc;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background-color: var(--bg); color: var(--text); transition: background-color 0.3s, color 0.3s; min-height: 100vh; }
+    @keyframes pageFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    body.page-enter { animation: pageFadeIn 0.35s ease both; }
+    body.page-exit { opacity: 0; transform: translateY(-6px); transition: opacity 0.2s ease, transform 0.2s ease; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+
+    /* ── Header ── */
+    header { padding: 2rem 0; }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .header-name h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 0.75rem; }
+    .header-name h1 span { color: var(--brand-blue); }
+    .header-subtitle { font-size: 0.9rem; color: var(--text-muted); letter-spacing: 0.01em; line-height: 1.5; }
+    .header-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; }
+    .mode-toggle button {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--surface); border: 2px solid var(--border);
+      cursor: pointer; padding: 0.4rem 0.75rem; border-radius: 999px;
+      color: var(--text); font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      font-family: inherit; transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .mode-toggle button:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+    .mode-toggle svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; pointer-events: none; }
+    .mode-toggle span { pointer-events: none; }
+    .header-links { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; }
+    .header-links a { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--brand-blue); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+    .header-links a:hover { color: var(--brand-blue-dark); }
+    .header-links svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+    .header-nav-bar { border-top: 1px solid var(--border); padding: 1.25rem 0; }
+    nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    nav a { display: inline-block; padding: 0.65rem 2rem; background: var(--nav-btn); color: #fff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
+    nav a:hover, nav a.active { background: var(--brand-blue); }
+
+    /* ── Page Hero ── */
+    .page-hero { padding: 3rem 0 2rem; border-top: 1px solid var(--border); }
+    .page-hero-inner { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .page-hero h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
+    .page-hero h2 span { color: var(--brand-blue); }
+    .page-hero p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 600px; margin-top: 0.75rem; }
+    .download-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; background: var(--brand-blue); color: #fff; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; white-space: nowrap; flex-shrink: 0; }
+    .download-btn:hover { background: var(--brand-blue-dark); }
+    .download-btn svg { width: 1rem; height: 1rem; }
+
+    /* ── Section layout ── */
+    .resume-section { padding: 3rem 0; border-top: 1px solid var(--border); }
+    .section-label { font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--brand-blue); margin-bottom: 1.75rem; display: flex; align-items: center; gap: 0.6rem; }
+    .section-label svg { width: 1.4rem; height: 1.4rem; flex-shrink: 0; }
+
+    /* ── Summary ── */
+    .summary-text { font-size: 0.97rem; color: var(--text-muted); line-height: 1.85; max-width: 860px; }
+
+    /* ── Skills ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.5rem; }
+    .skill-tag { padding: 0.45rem 0.9rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; background: var(--tag-bg); color: var(--tag-text); border-left: 3px solid var(--brand-blue); }
+
+    /* ── Experience ── */
+    .exp-item { display: flex; align-items: flex-start; gap: 1.25rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    .exp-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .exp-logo { width: 80px; height: 80px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); background: var(--surface); padding: 0.5rem; border-radius: 6px; }
+    .exp-logo img { width: 100%; height: 100%; object-fit: contain; }
+    html.dark .exp-logo img.invert-dark { filter: invert(1); }
+    .exp-body { flex: 1; min-width: 0; }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.2rem; flex-wrap: wrap; }
+    .exp-role { font-weight: 700; font-size: 1.05rem; }
+    .exp-company { font-size: 0.9rem; color: var(--brand-blue); margin-top: 0.1rem; }
+    .exp-location { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.1rem; font-family: 'IBM Plex Mono', monospace; }
+    .exp-period { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; font-family: 'IBM Plex Mono', monospace; flex-shrink: 0; }
+    .exp-context { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin: 0.6rem 0 0.9rem; font-style: italic; }
+    .exp-bullets { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 0.9rem; }
+    .exp-bullets li { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; padding-left: 1.1rem; position: relative; }
+    .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--brand-blue); font-weight: 700; }
+
+    /* ── Intellectual Property ── */
+    .patent-item { border-left: 3px solid var(--brand-blue); padding-left: 1.5rem; margin-bottom: 1.75rem; }
+    .patent-item:last-child { margin-bottom: 0; }
+    .patent-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+    .patent-name { font-weight: 700; font-size: 0.95rem; }
+    .patent-number { font-size: 0.75rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+    .patent-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── Education ── */
+    .edu-item { border-left: 3px solid var(--brand-blue); padding-left: 1.5rem; margin-bottom: 1.75rem; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-degree { font-weight: 700; font-size: 0.95rem; }
+    .edu-school { font-size: 0.85rem; color: var(--brand-blue); margin-top: 0.15rem; }
+    .edu-detail { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-top: 0.4rem; }
+
+    /* ── Certifications ── */
+    .cert-list { display: flex; flex-direction: column; }
+    .cert-item { display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.4rem 0; border-bottom: 1px solid var(--border); }
+    .cert-item:first-child { padding-top: 0; }
+    .cert-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .cert-logo { width: 80px; height: 80px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); background: var(--surface); padding: 0.5rem; border-radius: 6px; }
+    .cert-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .cert-body { flex: 1; min-width: 0; }
+    .cert-name { font-weight: 700; font-size: 0.95rem; line-height: 1.35; margin-bottom: 0.2rem; }
+    .cert-org { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .cert-meta { font-size: 0.72rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; margin-bottom: 0.75rem; }
+    .cert-btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.85rem; border: 1px solid var(--border); border-radius: 999px; font-size: 0.72rem; font-weight: 700; color: var(--brand-blue); letter-spacing: 0.05em; transition: border-color 0.2s, background 0.2s; text-decoration: none; }
+    .cert-btn:hover { border-color: var(--brand-blue); background: var(--tag-bg); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; font-size: 0.78rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 1.25rem; }
+      .page-hero-inner { flex-direction: column; align-items: flex-start; }
+      .exp-item { flex-direction: column; }
+      .exp-header { flex-direction: column; gap: 0.25rem; }
+      .patent-header { flex-direction: column; gap: 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="header-top">
+        <div class="header-name">
+          <h1>Mateo <span>McDermott</span></h1>
+          <p class="header-subtitle">Biomedical Engineer &nbsp;|&nbsp; Senior Technology Analyst</p>
+          <p class="header-subtitle" style="margin-top:0.3rem;">Greater Boston, MA</p>
+        </div>
+        <div class="header-meta">
+          <div class="mode-toggle">
+            <button id="themeToggle">
+              <svg id="iconSun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <svg id="iconMoon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              <span id="modeLabel">Dark Mode</span>
+            </button>
+          </div>
+          <div class="header-links">
+            <a href="mailto:mateomcdermott@gmail.com">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              mateomcdermott@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/mateomcdermott/" target="_blank" rel="noopener noreferrer">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/projects" target="_blank" rel="noopener noreferrer">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="header-nav-bar">
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="index.html#projects">Projects</a>
+          <a href="resume.html" class="active">Resume</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div>
+          <h2>My <span>Resume</span></h2>
+          <p>Biomedical engineer and technology analyst with a passion for developing life-enhancing medical innovations and data-driven solutions.</p>
+        </div>
+        <a href="resumes/Mateo McDermott Resume.pdf" download class="download-btn">
+          <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF Resume
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Engineering Summary -->
+  <section class="resume-section">
+    <div class="container">
+      <h2 class="section-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        Summary
+      </h2>
+      <p class="summary-text">Biomedical engineer with 5 years of experience in 3D Computer Aided Design (CAD) programs, certified as a SolidWorks CAD Design Associate (CSWA) and co-inventor on multiple patented designs. Exceptional skills in product development. Strong background in business problem-solving, software quality assurance/testing, and project management through current role at a Fortune Global 500 consulting firm. Recently promoted to Senior Technology Analyst. Currently seeking a position that incorporates my consulting insights and technical skills yet is in line with my true passion — developing life-enhancing medical innovations.</p>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="resume-section">
+    <div class="container">
+      <h2 class="section-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        Skills
+      </h2>
+      <div class="skills-grid">
+        <div class="skill-tag">3D-CAD / SolidWorks</div>
+        <div class="skill-tag">3D Printing</div>
+        <div class="skill-tag">Geometric Dimensioning &amp; Tolerancing (GD&amp;T)</div>
+        <div class="skill-tag">Root Cause Analysis</div>
+        <div class="skill-tag">Data Visualization (Power BI)</div>
+        <div class="skill-tag">MATLAB</div>
+        <div class="skill-tag">Python</div>
+        <div class="skill-tag">Generative / Agentic AI</div>
+        <div class="skill-tag">MS Office</div>
+        <div class="skill-tag">Clinical Requirements Analysis</div>
+        <div class="skill-tag">Project Management</div>
+        <div class="skill-tag">Quality Assurance (QA)</div>
+        <div class="skill-tag">Product Design &amp; Rapid Prototyping</div>
+        <div class="skill-tag">Agile / Scrum</div>
+        <div class="skill-tag">Business Analysis</div>
+        <div class="skill-tag">Technical Writing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="resume-section" id="experience">
+    <div class="container">
+      <h2 class="section-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Experience
+      </h2>
+
+      <div class="exp-item">
+        <div class="exp-logo"><img src="logos/Accenture.svg.png" alt="Accenture" /></div>
+        <div class="exp-body">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Senior Technology Analyst</div>
+              <div class="exp-company">Accenture LLP</div>
+              <div class="exp-location">Boston, MA</div>
+            </div>
+            <div class="exp-period">Sep 2023 – Present</div>
+          </div>
+          <p class="exp-context">Worked on two multi-million-dollar software implementation projects: a government licensing modernization impacting over 500K individuals, businesses, and schools, and a higher education modernization serving over 200K students and 700 faculty. Achieved rapid career growth, earning promotion to Senior Technology Analyst in June 2025.</p>
+          <ul class="exp-bullets">
+            <li>Co-manages an agile software testing phase (User Acceptance Testing and System Integration Testing) with 400+ user stories through test method creation, live system support for 75+ clients, and problem-solving the root cause of system defects to significantly improve system health.</li>
+            <li>Builds Tier 1 and Tier 2 go-live support dashboards from production ticket data (using Power BI, Excel, and Jira), giving executives real-time issue tracking and data-driven insights reducing post-go-live defects.</li>
+            <li>Develops weekly executive-level status reports in PowerPoint by collaborating with 5 workstreams, clearly communicating the program's operational progress and task completion status to client &amp; internal leadership.</li>
+          </ul>
+          <a class="cert-btn" href="https://www.accenture.com" target="_blank" rel="noopener noreferrer">Visit website &#8599;</a>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-logo"><img src="logos/Virgina Tech.png" alt="Virginia Tech" /></div>
+        <div class="exp-body">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Research Engineer</div>
+              <div class="exp-company">Howell MIND Lab at FBRI VTC</div>
+              <div class="exp-location">Roanoke, VA</div>
+            </div>
+            <div class="exp-period">Sep 2022 – May 2023 &amp; Jun 2025 – Present</div>
+          </div>
+          <p class="exp-context">Leads CAD design for a helmet compatible with magnetoencephalography sensors (OPM-MEG), a non-invasive neuroimaging tool for assessing infant brain health. Began research in March 2022, graduated university in May 2023, and then returned part-time in June 2025 to support patent development, research, and CAD/SolidWorks design.</p>
+          <ul class="exp-bullets">
+            <li>Designed and iterated a novel helmet in SolidWorks that securely holds multi-million-dollar OPM-MEG sensors on an infant's head to reliably collect data in a manner that is 3D printable, 99% cheaper, and 93% more lightweight than competitor solutions.</li>
+            <li>Utilized strong SolidWorks and 3D printing techniques such as complex surface modeling, GD&amp;T, and assembly modeling to generate iterative prototypes that were tested in a lab setting with infants.</li>
+            <li>Programmes a Visual Basic Application (VBA) script to automate 3D digital measurement data collection (position, orientation vectors, 2D layout coordinates) from SolidWorks. Used measurements to co-localize sensor data with a surface representation of patients' skull in MATLAB/Python.</li>
+            <li>Recommends alterations to development and design to improve quality of 3D printed products via offering 3D printing procedures (Cura/Ultimaker), GD&amp;T, and material selection guidance.</li>
+          </ul>
+          <a class="cert-btn" href="https://fbri.vtc.vt.edu/research/labs/howell-mind-lab.html" target="_blank" rel="noopener noreferrer">Visit website &#8599;</a>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-logo"><img src="logos/BioDesign Logo.png" alt="BioDesign" /></div>
+        <div class="exp-body">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Bio Design Innovation Internship &amp; Senior Capstone</div>
+              <div class="exp-company">Carilion Clinic Hospital and Virginia Tech</div>
+              <div class="exp-location">Roanoke, VA</div>
+            </div>
+            <div class="exp-period">Jun 2022 – May 2023</div>
+          </div>
+          <p class="exp-context">Co-led end-to-end product development: needs assessment, prototyping, validation and verification. Internship work advanced into year-long senior capstone; awarded Dan H. Pletta Award for Most Outstanding Senior Design Project.</p>
+          <ul class="exp-bullets">
+            <li>Co-led a transdisciplinary team of student engineers, industrial designers, and business students to assess the current state in the Department of Surgery and Nursing at Carilion Roanoke Memorial Hospital.</li>
+            <li>Designed a foreign body removal tool for gastroenterologists in the emergency room and a gastric bypass sleeve for weight loss with a team of biomedical engineers.</li>
+            <li>Created a Requirements Traceability Matrix (RTM) linking user needs, design inputs, and verification &amp; validation methods (V&amp;V), and results as they apply to ISO standards such as ISO 19993 and ISO 13485.</li>
+            <li>Shadowed several operating room (OR) procedures including an Aortic Stent Placement using stents made by Gore Medical and Boston Scientific. Also observed a Sleeve Gastrectomy conducted with DaVinci Robotic Surgical Systems.</li>
+          </ul>
+          <a class="cert-btn" href="https://biodesign.vt.edu" target="_blank" rel="noopener noreferrer">Visit website &#8599;</a>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-logo"><img src="logos/e-NABLE badge.png" alt="e-NABLE" /></div>
+        <div class="exp-body">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Academic Club President</div>
+              <div class="exp-company">e-NABLE Student Club at Virginia Tech</div>
+              <div class="exp-location">Blacksburg, VA</div>
+            </div>
+            <div class="exp-period">Aug 2020 – May 2023</div>
+          </div>
+          <p class="exp-context">e-NABLE is an online global community of volunteers who use their 3D printers to make free and low-cost prosthetic upper limb devices for children and adults in need. The VT chapter works hard to "Give the World a Helping Hand."</p>
+          <ul class="exp-bullets">
+            <li>Directed weekly student general body meetings for all 70 members, led CAD and 3D printing workshops, and managed end-to-end manufacturing of 6 assistive devices for a 10-year-old boy with a congenital limb deficiency.</li>
+            <li>Led campus-wide outreach initiatives, increasing club membership by 60% over 2 semesters through professional development offerings, industry partnerships, and effective fundraising events.</li>
+          </ul>
+          <a class="cert-btn" href="https://enablingthefuture.org" target="_blank" rel="noopener noreferrer">Visit website &#8599;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intellectual Property -->
+  <section class="resume-section" id="intellectual-property">
+    <div class="container">
+      <h2 class="section-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Intellectual Property
+      </h2>
+      <div class="patent-item">
+        <div class="patent-header">
+          <div class="patent-name">Helmet System and Kit Patent</div>
+          <div class="patent-number">U.S. Patent Application No.: 19/086,230</div>
+        </div>
+        <p class="patent-desc">Co-inventor and Computer Aided Designer of the helmet used for neuroimaging infants.</p>
+      </div>
+      <div class="patent-item">
+        <div class="patent-header">
+          <div class="patent-name">Gastric Bypass Sleeve for Weight Loss</div>
+          <div class="patent-number">U.S. Provisional Patent</div>
+        </div>
+        <p class="patent-desc">Co-inventor of a duodenal-jejunal gastric bypass sleeve as a weight loss solution to treat type-2 diabetes and severe obesity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="resume-section" id="certifications">
+    <div class="container">
+      <h2 class="section-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Certifications
+      </h2>
+      <div class="cert-list">
+
+        <div class="cert-item">
+          <div class="cert-logo"><img src="logos/SOLIDWORKS DESIGN - ASSOCIATE.png" alt="SolidWorks" /></div>
+          <div class="cert-body">
+            <div class="cert-name">CSWA — Certified SolidWorks CAD Design Associate</div>
+            <div class="cert-org">Dassault Syst&egrave;mes</div>
+            <div class="cert-meta">Issued Apr 2022 &nbsp;&middot;&nbsp; No expiry &nbsp;&middot;&nbsp; Credential ID: C-XKYB7UNG8C</div>
+            <a class="cert-btn" href="https://cv.virtualtester.com/qr/?b=SLDWRKS&i=C-XKYB7UNG8C" target="_blank" rel="noopener noreferrer">Show credential &#8599;</a>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-logo"><img src="logos/CITI Program.webp" alt="CITI Program" /></div>
+          <div class="cert-body">
+            <div class="cert-name">CITI Good Clinical Practice — NIH-Funded Clinical Trials</div>
+            <div class="cert-org">CITI Program</div>
+            <div class="cert-meta">Issued Sep 2022 &nbsp;&middot;&nbsp; Expires Sep 2025 &nbsp;&middot;&nbsp; Credential ID: 50926973</div>
+            <a class="cert-btn" href="https://www.citiprogram.org/verify/?w25622ec9-d6c4-4dd5-8231-6ae978e1effa-50926973" target="_blank" rel="noopener noreferrer">Show credential &#8599;</a>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-logo"><img src="logos/CITI Program.webp" alt="CITI Program" /></div>
+          <div class="cert-body">
+            <div class="cert-name">Research Study Design (RSD)</div>
+            <div class="cert-org">CITI Program</div>
+            <div class="cert-meta">Issued Aug 2022 &nbsp;&middot;&nbsp; Expires Aug 2025 &nbsp;&middot;&nbsp; Credential ID: 50926975</div>
+            <a class="cert-btn" href="https://www.citiprogram.org/verify/?w23e8ba4e-493a-4c0a-9da8-aed866677950-50926975" target="_blank" rel="noopener noreferrer">Show credential &#8599;</a>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-logo"><img src="logos/CITI Program.webp" alt="CITI Program" /></div>
+          <div class="cert-body">
+            <div class="cert-name">Social and Behavioral Research</div>
+            <div class="cert-org">CITI Program</div>
+            <div class="cert-meta">Issued Aug 2022 &nbsp;&middot;&nbsp; Expires Aug 2025 &nbsp;&middot;&nbsp; Credential ID: 50926970</div>
+            <a class="cert-btn" href="https://www.citiprogram.org/verify/?w8dbc8477-8b6a-4913-bd88-9aab0a7e1574-50926970" target="_blank" rel="noopener noreferrer">Show credential &#8599;</a>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-logo"><img src="logos/CITI Program.webp" alt="CITI Program" /></div>
+          <div class="cert-body">
+            <div class="cert-name">Basic Responsible Conduct of Research</div>
+            <div class="cert-org">CITI Program</div>
+            <div class="cert-meta">Issued Aug 2022 &nbsp;&middot;&nbsp; Expires Aug 2025 &nbsp;&middot;&nbsp; Credential ID: 50926972</div>
+            <a class="cert-btn" href="https://www.citiprogram.org/verify/?w85139b6b-8097-4853-91fe-efad4ba1110a-50926972" target="_blank" rel="noopener noreferrer">Show credential &#8599;</a>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-logo"><img src="logos/CITI Program.webp" alt="CITI Program" /></div>
+          <div class="cert-body">
+            <div class="cert-name">Research Conflict of Interest Training Requirement for Sponsored Research</div>
+            <div class="cert-org">CITI Program</div>
+            <div class="cert-meta">Issued Aug 2022 &nbsp;&middot;&nbsp; Expires Aug 2026 &nbsp;&middot;&nbsp; Credential ID: 50926971</div>
+            <a class="cert-btn" href="https://www.citiprogram.org/verify/?w710f0f45-6fbe-43ac-a4a4-134d6aed4ed0-50926971" target="_blank" rel="noopener noreferrer">Show credential &#8599;</a>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-logo"><img src="logos/CITI Program.webp" alt="CITI Program" /></div>
+          <div class="cert-body">
+            <div class="cert-name">Information Privacy and Security (IPS)</div>
+            <div class="cert-org">CITI Program</div>
+            <div class="cert-meta">Issued Sep 2022 &nbsp;&middot;&nbsp; Expires Sep 2025 &nbsp;&middot;&nbsp; Credential ID: 50926974</div>
+            <a class="cert-btn" href="https://www.citiprogram.org/verify/?wd4b8b054-84a3-474f-8375-ced6dbcb7b2d-50926974" target="_blank" rel="noopener noreferrer">Show credential &#8599;</a>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-logo"><img src="logos/CITI Program.webp" alt="CITI Program" /></div>
+          <div class="cert-body">
+            <div class="cert-name">Biomedical Research</div>
+            <div class="cert-org">CITI Program</div>
+            <div class="cert-meta">Issued Mar 2021 &nbsp;&middot;&nbsp; Expires Mar 2024 &nbsp;&middot;&nbsp; Credential ID: 41271077</div>
+            <a class="cert-btn" href="https://www.citiprogram.org/verify/?w7b2f4d59-22f4-4aad-b502-5af1132d4748-59946597" target="_blank" rel="noopener noreferrer">Show credential &#8599;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="resume-section" id="education">
+    <div class="container">
+      <h2 class="section-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        Education
+      </h2>
+      <div class="edu-item">
+        <div class="edu-degree">Bachelor of Science in Biomedical Engineering</div>
+        <div class="edu-school">Virginia Tech &nbsp;&middot;&nbsp; Blacksburg, VA &nbsp;&middot;&nbsp; 2022</div>
+        <div class="edu-detail">3.57 GPA in College of Engineering &nbsp;&middot;&nbsp; Dean's List for 4 semesters &nbsp;&middot;&nbsp; Biomedical Engineering Ambassador</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">High School Diploma</div>
+        <div class="edu-school">Newburyport High School &nbsp;&middot;&nbsp; Newburyport, MA</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      &copy; 2026 Mateo McDermott &mdash; Building technology, solving problems, and loving every step of the journey.
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      document.body.classList.add('page-enter');
+      document.querySelectorAll('nav a').forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.classList.remove('page-enter');
+            document.body.classList.add('page-exit');
+            setTimeout(function() { window.location.href = href; }, 200);
+          });
+        }
+      });
+    })();
+    (function() {
+      var dark = localStorage.getItem('theme') === 'dark';
+      function applyTheme() {
+        document.documentElement.classList.toggle('dark', dark);
+        document.getElementById('iconSun').style.display = dark ? 'none' : '';
+        document.getElementById('iconMoon').style.display = dark ? '' : 'none';
+        document.getElementById('modeLabel').textContent = dark ? 'Light Mode' : 'Dark Mode';
+      }
+      applyTheme();
+      document.getElementById('themeToggle').onclick = function() {
+        dark = !dark;
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+        applyTheme();
+      };
+    })();
+  </script>
+
+</body>
+</html>
