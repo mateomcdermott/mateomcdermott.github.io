@@ -39,6 +39,8 @@
     body.page-exit { opacity: 0; transform: translateY(-6px); transition: opacity 0.2s ease, transform 0.2s ease; }
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+
+    /* ── Top bar ── */
     .topbar { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); }
     .topbar-inner { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
     .topbar-name { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
@@ -50,107 +52,184 @@
     .topbar-toggle { background: none; border: none; cursor: pointer; color: var(--text); padding: 0.35rem; display: flex; align-items: center; transition: color 0.2s; }
     .topbar-toggle:hover { color: var(--brand-blue); }
     .topbar-toggle svg { width: 1.1rem; height: 1.1rem; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; pointer-events: none; }
-    section { padding: 4rem 0; border-top: 1px solid var(--border); }
-    .section-label { font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--brand-blue); margin-bottom: 1.5rem; }
-    a.section-label { text-decoration: none; transition: color 0.2s; cursor: pointer; }
-    a.section-label::after { content: '↗'; font-size: 1.1rem; margin-left: 0.4rem; opacity: 0; transform: translateX(-4px); display: inline-block; transition: opacity 0.2s, transform 0.2s; }
-    a.section-label:hover { color: var(--brand-blue-dark); }
-    a.section-label:hover::after { opacity: 1; transform: translateX(0); }
-    .section-sublink { display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--brand-blue); margin-bottom: 1.75rem; transition: color 0.2s; }
-    .section-sublink:hover { color: var(--brand-blue-dark); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .about-heading { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 0.75rem; }
-    .about-grid p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 0.75rem; }
+
+    /* ── Hero ── */
+    .about-hero { padding: 5rem 0 4rem; border-top: 1px solid var(--border); }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: center; }
+    .hero-img-wrap { position: relative; }
+    .hero-img-wrap img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; display: block; }
+    .hero-img-accent { position: absolute; bottom: -1rem; right: -1rem; width: 60%; height: 60%; border: 3px solid var(--brand-blue); z-index: -1; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--brand-blue); margin-bottom: 1rem; font-family: 'IBM Plex Mono', monospace; }
+    .hero-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1.5rem; }
+    .hero-title span { color: var(--brand-blue); }
+    .hero-body { font-size: 1rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 1rem; }
+    .hero-stats { display: flex; gap: 2.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .stat-number { font-size: 1.75rem; font-weight: 700; color: var(--brand-blue); font-family: 'IBM Plex Mono', monospace; line-height: 1; }
+    .stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+
+    /* ── Project cards ── */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
     .project-card { background: var(--surface); padding: 2rem; border: 1px solid var(--border); transition: box-shadow 0.25s, border-color 0.25s, background 0.3s; }
     .project-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-color: var(--brand-blue); }
     .project-year { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; font-family: 'IBM Plex Mono', monospace; }
     .project-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
     .project-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; }
+    /* ── Patent / IP ── */
+    .patent-item { border-left: 2px solid var(--brand-blue); padding-left: 1.25rem; margin-bottom: 1.25rem; }
+    .patent-item:last-child { margin-bottom: 0; }
+    .patent-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+    .patent-name { font-weight: 700; font-size: 0.95rem; }
+    .patent-number { font-size: 0.75rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+    .patent-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+    .ip-icon { width: 1.4rem; height: 1.4rem; flex-shrink: 0; }
+
     .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
     .tag { padding: 0.2rem 0.7rem; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: var(--tag-bg); color: var(--brand-blue); border: 1px solid var(--brand-blue); }
     .project-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 700; color: var(--brand-blue); transition: color 0.2s; }
     .project-link:hover { color: var(--brand-blue-dark); }
     .project-link svg { width: 1rem; height: 1rem; transition: transform 0.2s; }
     .project-link:hover svg { transform: translateX(4px); }
-    .resume-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
-    .resume-col-wide { grid-column: span 2; }
-    .resume-section-title { display: flex; align-items: center; gap: 0.6rem; font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--brand-blue); margin-bottom: 1.25rem; }
-    .resume-section-title svg { color: var(--brand-blue); width: 1.5rem; height: 1.5rem; }
-    a.resume-section-title { text-decoration: none; transition: color 0.2s; cursor: pointer; }
-    a.resume-section-title::after { content: '↗'; font-size: 1.1rem; margin-left: 0.3rem; opacity: 0; transform: translateX(-4px); display: inline-block; transition: opacity 0.2s, transform 0.2s; }
-    a.resume-section-title:hover { color: var(--brand-blue-dark); }
-    a.resume-section-title:hover::after { opacity: 1; transform: translateX(0); }
-    .exp-item { border-left: 2px solid var(--brand-blue); padding-left: 1.25rem; margin-bottom: 1.25rem; }
-    .exp-item:last-child { margin-bottom: 0; }
-    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.2rem; }
-    .exp-role { font-weight: 700; font-size: 0.95rem; }
-    .exp-company { font-size: 0.85rem; color: var(--brand-blue); }
-    .exp-period { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; margin-top: 0.15rem; font-family: 'IBM Plex Mono', monospace; }
-    .exp-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-top: 0.4rem; }
-    .edu-item { border-left: 2px solid var(--brand-blue); padding-left: 1.25rem; margin-bottom: 0.9rem; }
-    .edu-degree { font-weight: 700; font-size: 0.9rem; }
-    .edu-school { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.15rem; }
-    .skills-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .skill-tag { padding: 0.3rem 0.75rem; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; background: var(--tag-bg); color: var(--tag-text); }
-    .download-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; background: var(--brand-blue); color: #fff; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; margin-top: 1.25rem; }
-    .download-btn:hover { background: var(--brand-blue-dark); }
-    .download-btn svg { width: 1rem; height: 1rem; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .contact-info p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.25rem; }
-    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
-    .contact-link { display: flex; align-items: center; gap: 0.9rem; font-size: 0.9rem; color: var(--text); transition: color 0.2s; }
-    a.contact-link { color: var(--brand-blue); text-decoration: underline; text-underline-offset: 3px; }
-    a.contact-link:hover { color: var(--brand-blue-dark); }
-    .link-icon { width: 2.25rem; height: 2.25rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-    .link-icon svg { width: 1.75rem; height: 1.75rem; }
-    .location-link { color: var(--text); cursor: default; }
-    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-    .form-group label { display: block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text); margin-bottom: 0.4rem; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; background: transparent; border: 2px solid var(--border); padding: 0.8rem 1rem; font-size: 0.9rem; color: var(--text); font-family: inherit; outline: none; transition: border-color 0.2s; resize: none; appearance: none; }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--brand-blue); }
-    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
-    .form-group select option { background: var(--surface); color: var(--text); }
-    .submit-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2.25rem; background: var(--brand-black); color: #fff; border: none; cursor: pointer; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: inherit; transition: background 0.2s; align-self: flex-start; }
-    .submit-btn:hover:not(:disabled) { background: var(--brand-blue); }
-    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .submit-btn svg { width: 1rem; height: 1rem; }
-    .form-feedback { font-size: 0.85rem; margin-top: 0.25rem; display: none; }
-    .form-feedback.error { color: #dc2626; display: block; }
-    .form-col { position: relative; }
-    .form-success-state { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 2rem; gap: 1rem; }
-    .form-success-state.visible { display: flex; animation: successFadeIn 0.4s ease both; }
-    @keyframes successFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .success-check { width: 72px; height: 72px; margin-bottom: 0.5rem; }
-    .check-svg { width: 100%; height: 100%; overflow: visible; }
-    .check-circle { stroke-dasharray: 157; stroke-dashoffset: 157; animation: drawCircle 0.55s cubic-bezier(0.4,0,0.2,1) 0.1s forwards; }
-    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
-    .check-tick { stroke-dasharray: 36; stroke-dashoffset: 36; animation: drawTick 0.35s cubic-bezier(0.4,0,0.2,1) 0.6s forwards; }
-    @keyframes drawTick { to { stroke-dashoffset: 0; } }
-    .success-heading { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; animation: successFadeIn 0.4s ease 0.75s both; }
-    .success-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; max-width: 320px; animation: successFadeIn 0.4s ease 0.9s both; }
-    .success-reset { margin-top: 0.5rem; background: none; border: 2px solid var(--border); color: var(--text-muted); font-family: inherit; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.5rem 1.25rem; cursor: pointer; transition: border-color 0.2s, color 0.2s; animation: successFadeIn 0.4s ease 1.05s both; }
-    .success-reset:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+    .section-sublink { display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--brand-blue); margin-bottom: 1.75rem; transition: color 0.2s; }
+    .section-sublink:hover { color: var(--brand-blue-dark); }
+
+    /* ── Story sections ── */
+    .story-section { padding: 4rem 0; border-top: 1px solid var(--border); }
+    .section-label { font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--brand-blue); margin-bottom: 2rem; }
+    .story-block { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .story-block.reverse { direction: rtl; }
+    .story-block.reverse > * { direction: ltr; }
+    .story-block.full { grid-template-columns: 1fr; max-width: 760px; }
+    .story-text h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
+    .story-text p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 1rem; }
+    .story-text p:last-child { margin-bottom: 0; }
+    .story-img img { width: 100%; display: block; object-fit: cover; }
+    .story-img .img-caption { font-size: 0.72rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; margin-top: 0.6rem; }
+    .edu-item { border-left: 3px solid var(--brand-blue); padding-left: 1.5rem; margin-bottom: 1.75rem; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-degree { font-weight: 700; font-size: 0.95rem; }
+    .edu-school { font-size: 0.85rem; color: var(--brand-blue); margin-top: 0.15rem; }
+    .edu-detail { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-top: 0.4rem; }
+
+    /* ── Timeline ── */
+    .timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+    .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: var(--brand-blue); transform: translateX(-50%); }
+    .timeline-item { position: relative; display: grid; grid-template-columns: 1fr 10rem 1fr; align-items: start; padding-bottom: 3rem; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    /* Center dot + date badge */
+    .timeline-center { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; padding-top: 0.25rem; }
+    .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--brand-blue); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--brand-blue); flex-shrink: 0; }
+    .timeline-dot.active { position: relative; }
+    .timeline-dot.active::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--brand-blue); animation: pulse-ring 1.8s ease-out infinite; }
+    .timeline-dot.active::before { content: ''; position: absolute; inset: -12px; border-radius: 50%; border: 1.5px solid var(--brand-blue); animation: pulse-ring 1.8s ease-out 0.4s infinite; }
+    @keyframes pulse-ring { 0% { transform: scale(0.7); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+    .timeline-badge { background: var(--brand-blue); color: #fff; font-size: 0.68rem; font-weight: 700; font-family: 'IBM Plex Mono', monospace; padding: 0.25rem 0.5rem; margin-top: 0.5rem; white-space: nowrap; letter-spacing: 0.05em; }
+    .timeline-badge-gap { background: transparent; border: 1px dashed var(--brand-blue); color: var(--brand-blue); opacity: 0.55; letter-spacing: 0.18em; padding: 0.15rem 0.5rem; }
+    /* Cards */
+    .timeline-card { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
+    .timeline-card:hover { border-color: var(--brand-blue); box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+    .timeline-role { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .timeline-org { font-size: 0.82rem; color: var(--brand-blue); font-weight: 600; margin-bottom: 0.75rem; }
+    .timeline-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; }
+    /* Dual-period engagement blocks */
+    .ep-periods { display: flex; flex-direction: column; gap: 0; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .ep-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.4rem 0; }
+    .ep-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+    .ep-label.ep-return { color: var(--brand-blue); font-weight: 700; }
+    .ep-chip { font-size: 0.7rem; font-weight: 700; font-family: 'IBM Plex Mono', monospace; padding: 0.2rem 0.65rem; border-radius: 999px; background: var(--tag-bg); color: var(--text-muted); white-space: nowrap; }
+    .ep-chip.active { background: var(--brand-blue); color: #fff; }
+    .ep-sep { display: flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; color: var(--text-muted); opacity: 0.6; padding: 0.1rem 0; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; }
+    .ep-sep::before, .ep-sep::after { content: ''; flex: 1; height: 1px; border-top: 1px dashed var(--border); }
+    /* Left card — right-aligned, connector on right */
+    .timeline-left { padding-right: 1.5rem; text-align: left; }
+    /* Right card — left-aligned, connector on left */
+    .timeline-right { padding-left: 1.5rem; }
+    /* Empty side placeholder */
+    .timeline-empty { padding: 0; }
+
+    /* ── Interests list ── */
+    .interests-list { display: flex; flex-direction: column; gap: 0; }
+    .interest-row { display: grid; grid-template-columns: 1fr 1fr; min-height: 280px; border: 1px solid var(--border); border-bottom: none; }
+    .interest-row:last-child { border-bottom: 1px solid var(--border); }
+    .interest-row.flip { direction: rtl; }
+    .interest-row.flip > * { direction: ltr; }
+    .interest-imgs { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+    .interest-imgs.single { grid-template-columns: 1fr; }
+    .interest-imgs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .interest-imgs .img-placeholder { width: 100%; height: 100%; background: var(--tag-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: var(--text-muted); font-size: 2rem; }
+    .interest-imgs .img-placeholder span { font-size: 0.72rem; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; }
+    .interest-text-wrap { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+    .interest-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--brand-blue); margin-bottom: 0.6rem; font-family: 'IBM Plex Mono', monospace; }
+    .interest-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
+    .interest-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; }
+
+    /* ── CTA ── */
+    .cta-bar { padding: 4rem 0; border-top: 1px solid var(--border); text-align: center; }
+    .cta-bar h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .cta-bar p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2rem; }
+    .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--brand-blue); color: #fff; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
+    .btn-primary:hover { background: var(--brand-blue-dark); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: transparent; color: var(--text); border: 2px solid var(--border); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+
     footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; font-size: 0.78rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
+
     .sym { display: inline; }
     @media (max-width: 768px) {
-      .container { padding: 0 1.25rem; }
+      body { overflow-x: hidden; }
       .sym { display: none; }
-      a.section-label::after, a.resume-section-title::after { display: none; }
+      .container { padding: 0 1.25rem; }
       .topbar-inner { padding: 0 1rem; gap: 0.5rem; }
       .topbar-name { font-size: 0.95rem; }
       .topbar-right { gap: 0.5rem; }
       .topbar-nav a { padding: 0.3rem 0.35rem; font-size: 0.62rem; letter-spacing: 0.03em; }
       .topbar-nav a.hide-mobile { display: none; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .form-row { grid-template-columns: 1fr; }
-      .submit-btn { width: 100%; justify-content: center; box-sizing: border-box; }
-      .resume-grid { grid-template-columns: 1fr; }
-      .resume-col-wide { grid-column: span 1; }
-      .exp-header { flex-direction: column; gap: 0.2rem; }
-      .exp-period { white-space: normal; }
-      .download-btn { width: 100%; justify-content: center; box-sizing: border-box; }
+
+      /* Header */
+      .header-top { flex-direction: column; gap: 1rem; }
+      .header-meta { align-items: flex-start; }
+      .header-links { flex-direction: row; align-items: center; gap: 0.75rem; }
+      .header-links .link-label { display: none; }
+      .header-links svg { width: 1.4rem; height: 1.4rem; }
+      nav a { padding: 0.65rem 1.25rem; font-size: 0.75rem; }
+
+      /* Hero */
+      .about-hero { padding: 2rem 0; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-img-wrap { max-width: 100%; }
+      .hero-img-wrap img { aspect-ratio: 3/4; object-position: top; max-height: 50vh; }
+      .hero-img-accent { display: none; }
+      .hero-stats { flex-wrap: nowrap; gap: 0; justify-content: space-between; }
+      .stat-number { font-size: 1.2rem; }
+      .stat-label { font-size: 0.6rem; letter-spacing: 0.06em; }
+
+      /* Story sections */
+      .story-section { padding: 2rem 0; }
+      .section-label { font-size: 1.4rem; margin-bottom: 1.25rem; }
+      .story-block, .story-block.reverse { grid-template-columns: 1fr; direction: ltr; gap: 1.5rem; }
+
+      /* Timeline */
+      .timeline::before { left: 1.5rem; transform: none; }
+      .timeline-item { grid-template-columns: 3rem 1fr; grid-template-rows: auto; }
+      .timeline-left, .timeline-right { grid-column: 2; padding: 0 0 0 1rem; text-align: left; }
+      .timeline-center { grid-column: 1; grid-row: 1; align-items: center; padding-top: 1rem; }
+      .timeline-badge { display: none; }
+      .timeline-empty { display: none; }
+      .ep-row { flex-wrap: wrap; gap: 0.4rem; }
+      .ep-chip { white-space: normal; }
+      .timeline-card { padding: 1.1rem; }
+
+      /* Interests */
+      .interest-row, .interest-row.flip { grid-template-columns: 1fr; direction: ltr; min-height: unset; }
+      .interest-imgs { height: 240px; }
+      .interest-text-wrap { padding: 1.25rem; }
+      .interest-title { font-size: 1.05rem; }
+
+      /* CTA */
+      .cta-bar { padding: 2.5rem 0; }
+      .cta-bar h2 { font-size: 1.3rem; }
+      .btn-primary, .btn-outline { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -161,8 +240,7 @@
       <a href="index.html" class="topbar-name">Mateo <span>McDermott</span></a>
       <div class="topbar-right">
         <nav class="topbar-nav">
-          <a href="index.html" class="active hide-mobile">Home</a>
-          <a href="about.html">About</a>
+          <a href="index.html" class="active">Home</a>
           <a href="#projects" class="hide-mobile">Projects</a>
           <a href="resume.html">Resume</a>
           <a href="contact.html">Contact</a>
@@ -175,30 +253,57 @@
     </div>
   </header>
 
-  <section id="about">
+  <!-- Hero -->
+  <section class="about-hero">
     <div class="container">
-      <h2 class="section-label">About</h2>
-      <div class="about-grid">
-        <div>
-          <h3 class="about-heading">Who I Am</h3>
-          <p>I'm a biomedical engineer and business analyst with a passion for developing innovative healthcare technologies and data-driven solutions.</p>
-          <p>My expertise lies at the intersection of engineering, technology, and business strategy, where I help organizations transform complex data into actionable insights.</p>
-          <p>Based in Boston, MA, I work on projects ranging from medical device development to enterprise analytics systems, always focusing on creating meaningful impact through technology.</p>
+      <div class="hero-inner">
+        <div class="hero-img-wrap">
+          <img src="images/Profile Photo1.JPG" alt="Mateo McDermott" />
         </div>
-        <div>
-          <h3 class="about-heading">Background</h3>
-          <p>My work spans academic research at Virginia Tech, where I contributed to cutting-edge neuroimaging projects, to enterprise-level business systems analysis.</p>
-          <p>I specialize in Power BI dashboard development, data visualization, and creating scalable analytics solutions that drive business decisions.</p>
-          <p>Through my engineering background and technical expertise, I bring a unique perspective to solving complex problems in healthcare technology and business intelligence.</p>
+        <div class="hero-copy">
+          <p class="hero-eyebrow">// About Me</p>
+          <h1 class="hero-title">Engineer. Business Systems Analyst.<br /><span>Problem Solver.</span></h1>
+          <p class="hero-body">I'm Mateo — a biomedical engineer turned business analyst with a drive to build things that matter. Whether it's a wearable neuroimaging device for infants or an enterprise analytics platform, I bring the same mindset: understand the problem deeply, design with intention, and measure the impact.</p>
+          <p class="hero-body">I grew up in a family that valued hard work and curiosity, which sent me to Virginia Tech to study biomedical engineering — a field that sits at the crossroads of medicine, physics, and design. What started in a neuroimaging lab has grown into a career spanning medical device development, business intelligence, and enterprise technology consulting.</p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">3+</span>
+              <span class="stat-label">Years in Tech</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">10+</span>
+              <span class="stat-label">Projects Shipped</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">70+</span>
+              <span class="stat-label">Volunteers Led</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="projects">
+  <!-- Origin Story -->
+  <section class="story-section">
+    <div class="container">
+      <h2 class="section-label">My Story</h2>
+      <div class="story-block full">
+        <div class="story-text">
+          <h3>Where It Started</h3>
+          <p>I've always been someone who needs to know how things work. Growing up, that meant dismantling electronics, building models, and driving everyone around me slightly crazy with questions. That curiosity eventually led me to biomedical engineering, a discipline where getting it right actually matters, because the person on the other end of the design is a real human being.</p>
+          <p>Growing up with a father in medicine and a girlfriend who's a nurse means dinner conversation comes with a side of clinical terminology. I didn't choose to be surrounded by the medical field. It chose me.</p>
+          <p>After graduating in 2023, I brought that engineer's mindset into the world of enterprise technology, and the skills translated better than I expected. I get to spend my days helping people solve real problems, and the engineer in me never really clocked out. Through my research engineering role at Virginia Tech, I keep those technical instincts sharp, staying close to the hands-on, first-principles work that got me hooked on this field in the first place.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlighted Projects -->
+  <section class="story-section" id="projects">
     <div class="container">
       <h2 class="section-label">Highlighted Projects</h2>
-      <a href="#" class="section-sublink">View all projects <span class="sym">→</span></a>
+      <a href="#projects" class="section-sublink">View all projects <span class="sym">→</span></a>
       <div class="projects-grid">
         <div class="project-card">
           <div class="project-year">2026</div>
@@ -225,198 +330,243 @@
     </div>
   </section>
 
-  <section id="resume">
+  <!-- Intellectual Property -->
+  <section class="story-section">
     <div class="container">
-      <a href="resume.html" class="section-label" style="display:inline-block; margin-bottom:2rem;">Resume</a>
-      <div class="resume-grid">
-        <div class="resume-col-wide">
-          <a href="resume.html#experience" class="resume-section-title">
-            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            Experience
-          </a>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Senior Technology Analyst</div><div class="exp-company">Accenture LLP</div></div>
-              <div class="exp-period">Sep 2023 – Present</div>
-            </div>
-            <p class="exp-desc">Enterprise IT consultant specializing in software verification, validation, and business systems analysis for global biopharmaceutical and life sciences clients. Delivers end-to-end test management, requirements traceability, and AI-enabled QA solutions across Salesforce and SAP implementations.</p>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Research Engineer</div><div class="exp-company">MIND Lab, Virginia Tech</div></div>
-              <div class="exp-period">Sep 2022 – May 2023 | Jun 2025 – Present</div>
-            </div>
-            <p class="exp-desc">Biomedical design engineer for a patented OPM-MEG helmet system used in infant clinical neuroscience research. Responsible for end-to-end V&amp;V, ISO 13485-compliant design documentation, and 3D-printed component material validation.</p>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">BioDesign Innovation Intern &amp; Senior Capstone</div><div class="exp-company">Carilion Clinic / Virginia Tech</div></div>
-              <div class="exp-period">Jun 2022 – May 2023</div>
-            </div>
-            <p class="exp-desc">Conducted a clinical needs assessment at one of Virginia's largest hospitals, identifying 40+ medical device design opportunities. Engineered two high-fidelity prototypes through full design controls — from RTM and DHF documentation through lab validation and human factors testing.</p>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">President</div><div class="exp-company">VT e-NABLE Chapter</div></div>
-              <div class="exp-period">Aug 2020 – May 2023</div>
-            </div>
-            <p class="exp-desc">Led 70+ volunteers in designing and fabricating free 3D-printed prosthetic devices for children with limb differences, enabling them to play, compete in sports, and live more independently. Grew chapter membership by 60% through outreach, industry partnerships, and fundraising.</p>
-          </div>
-          <a href="resume.html#intellectual-property" class="resume-section-title" style="margin-top:1.75rem;">
-            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Intellectual Property
-          </a>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Helmet System and Kit Patent</div></div>
-              <div class="exp-period">U.S. App. No.: 19/086,230</div>
-            </div>
-            <p class="exp-desc">Co-inventor and CAD designer of the OPM-MEG infant neuroimaging helmet system.</p>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Gastric Bypass Sleeve for Weight Loss</div></div>
-              <div class="exp-period">U.S. Provisional Patent</div>
-            </div>
-            <p class="exp-desc">Co-inventor of a duodenal-jejunal gastric bypass sleeve to treat type-2 diabetes and severe obesity.</p>
-          </div>
+      <h2 class="section-label">Intellectual Property</h2>
+      <div class="patent-item">
+        <div class="patent-header">
+          <div class="patent-name">Helmet System and Kit Patent</div>
+          <a class="patent-number" href="https://patents.google.com/patent/US20250295341A1/en" target="_blank" rel="noopener noreferrer" style="color:var(--brand-blue);text-decoration:underline;text-underline-offset:3px;">U.S. Patent Application No.: 19/086,230</a>
+        </div>
+        <p class="patent-desc">Co-inventor and Computer Aided Designer of the helmet used for neuroimaging infants.</p>
+      </div>
+      <div class="patent-item">
+        <div class="patent-header">
+          <div class="patent-name">Gastric Bypass Sleeve for Weight Loss</div>
+          <div class="patent-number">U.S. Provisional Patent</div>
+        </div>
+        <p class="patent-desc">Co-inventor of a duodenal-jejunal gastric bypass sleeve as a weight loss solution to treat type-2 diabetes and severe obesity.</p>
+      </div>
+    </div>
+  </section>
 
-          <a href="resume.html#certifications" class="resume-section-title" style="margin-top:1.75rem;">
-            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            Certifications
-          </a>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">CSWA — Certified SolidWorks CAD Design Associate</div><div class="exp-company">Dassault Systèmes</div></div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">CITI Good Clinical Practice — NIH-Funded Clinical Trials</div><div class="exp-company">CITI Program</div></div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Research Study Design (RSD)</div><div class="exp-company">CITI Program</div></div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Social and Behavioral Research</div><div class="exp-company">CITI Program</div></div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Basic Responsible Conduct of Research</div><div class="exp-company">CITI Program</div></div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Research Conflict of Interest Training</div><div class="exp-company">CITI Program</div></div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Information Privacy and Security (IPS)</div><div class="exp-company">CITI Program</div></div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-header">
-              <div><div class="exp-role">Biomedical Research</div><div class="exp-company">CITI Program</div></div>
-            </div>
-          </div>
-
-          <a href="resume.html#education" class="resume-section-title" style="margin-top:1.75rem;">
-            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            Education
-          </a>
+  <!-- Education -->
+  <section class="story-section">
+    <div class="container">
+      <h2 class="section-label">Education</h2>
+      <div class="story-block reverse">
+        <div>
           <div class="edu-item">
             <div class="edu-degree">Bachelor of Science in Biomedical Engineering</div>
-            <div class="edu-school" style="color:var(--brand-blue);">Virginia Tech <span style="color:var(--text-muted);">· Blacksburg, VA · 2023</span></div>
-            <div class="edu-school" style="margin-top:0.3rem;">3.57 GPA in College of Engineering · Dean's List for 4 semesters · Biomedical Engineering Ambassador</div>
+            <div class="edu-school">Virginia Tech &nbsp;&middot;&nbsp; Blacksburg, VA &nbsp;&middot;&nbsp; 2023</div>
+            <div class="edu-detail">3.57 GPA in College of Engineering &nbsp;&middot;&nbsp; Dean's List for 4 semesters &nbsp;&middot;&nbsp; Biomedical Engineering Ambassador</div>
           </div>
-          <a href="resumes/Mateo McDermott Resume.pdf" download class="download-btn" style="margin-top:1.25rem;">
-            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download PDF Resume
-          </a>
+          <div class="edu-item">
+            <div class="edu-degree">High School Diploma</div>
+            <div class="edu-school">Newburyport High School &nbsp;&middot;&nbsp; Newburyport, MA</div>
+          </div>
+        </div>
+        <div class="story-img">
+          <img src="images/Gradphoto.JPG" alt="Mateo and friends at Virginia Tech graduation" />
+          <p class="img-caption">// Graduation day at Virginia Tech, May 2023</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contact">
+  <!-- Career -->
+  <section class="story-section">
     <div class="container">
-      <h2 class="section-label">Contact</h2>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p>I'm open to new opportunities, collaborations, and conversations. Whether you have a project in mind or just want to connect, feel free to reach out.</p>
-          <div class="contact-links">
-            <a href="mailto:mateomcdermott@gmail.com" class="contact-link">
-              <span class="link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
-              mateomcdermott@gmail.com
-            </a>
-            <a href="https://www.linkedin.com/in/mateomcdermott/" target="_blank" rel="noopener noreferrer" class="contact-link">
-              <span class="link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
-              LinkedIn
-            </a>
-            <a href="https://github.com/projects" target="_blank" rel="noopener noreferrer" class="contact-link">
-              <span class="link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
-              GitHub
-            </a>
-            <div class="contact-link location-link">
-              <span class="link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-              Boston, MA
-            </div>
-          </div>
-        </div>
-        <div class="form-col" id="formCol">
-          <form class="contact-form" id="contactForm">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="fname">Name</label>
-                <input type="text" id="fname" name="name" required placeholder="Your name" />
-              </div>
-              <div class="form-group">
-                <label for="femail">Email</label>
-                <input type="email" id="femail" name="email" required placeholder="your@email.com" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="fsubject">Subject</label>
-              <select id="fsubject" name="subject">
-                <option value="" disabled selected>Select a topic...</option>
-                <option value="Job Opportunity">Job Opportunity</option>
-                <option value="Collaboration">Collaboration</option>
-                <option value="Project Inquiry">Project Inquiry</option>
-                <option value="Just Saying Hi">Just Saying Hi</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="fmessage">Message</label>
-              <textarea id="fmessage" name="message" rows="5" required placeholder="Tell me about your project or just say hi..."></textarea>
-            </div>
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-            <button type="submit" class="submit-btn" id="submitBtn">
-              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              <span id="submitLabel">Send Message</span>
-            </button>
-            <p class="form-feedback" id="formFeedback"></p>
-          </form>
+      <h2 class="section-label">Career Path</h2>
+      <div class="timeline">
 
-          <!-- Success state -->
-          <div class="form-success-state" id="formSuccess" aria-live="polite">
-            <div class="success-check">
-              <svg class="check-svg" viewBox="0 0 52 52" fill="none">
-                <circle class="check-circle" cx="26" cy="26" r="24" stroke="var(--brand-blue)" stroke-width="2.5"/>
-                <polyline class="check-tick" points="14,27 22,35 38,18" stroke="var(--brand-blue)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+        <!-- Item 1: card on LEFT -->
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="timeline-card">
+              <div class="timeline-role">Senior Technology Analyst</div>
+              <div class="timeline-org">Accenture LLP</div>
+              <p>Enterprise IT consultant specializing in software verification, validation, and business systems analysis for global biopharmaceutical and life sciences clients. Delivers end-to-end test management, requirements traceability, and AI-enabled QA solutions across Salesforce and SAP implementations.</p>
             </div>
-            <p class="success-heading">Message Sent</p>
-            <p class="success-sub">Thanks for reaching out — I'll get back to you soon.</p>
-            <button class="success-reset" id="resetBtn">Send another message</button>
+          </div>
+          <div class="timeline-center">
+            <div class="timeline-dot active"></div>
+            <div class="timeline-badge">Sep 2023 – Present</div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Item 2: card on RIGHT -->
+        <div class="timeline-item">
+          <div class="timeline-empty"></div>
+          <div class="timeline-center">
+            <div class="timeline-dot active"></div>
+            <div class="timeline-badge" style="white-space:normal;text-align:center;line-height:1.9;width:160px;">Jun 2025 – Present<br><span>&amp;</span><br>Sep 2022 – May 2023</div>
+          </div>
+          <div class="timeline-right">
+            <div class="timeline-card">
+              <div class="timeline-role">Research Engineer</div>
+              <div class="timeline-org">MIND Lab, Virginia Tech</div>
+              <div class="ep-periods">
+                <div class="ep-row">
+                  <span class="ep-chip active">Jun 2025 – Present</span>
+                </div>
+                <div class="ep-sep">invited back</div>
+                <div class="ep-row">
+                  <span class="ep-label">Initial engagement</span>
+                  <span class="ep-chip">Sep 2022 – May 2023</span>
+                </div>
+              </div>
+              <p>Biomedical design engineer for a patented OPM-MEG helmet system used in infant clinical neuroscience research. Delivered end-to-end V&amp;V, ISO 13485-compliant design documentation, and 3D-printed component validation through project completion in 2023 — then sought out by the lab to continue advancing the system in 2025, reflecting the depth of specialized expertise and institutional knowledge built over the original engagement.</p>
+            </div>
           </div>
         </div>
+
+        <!-- Item 3: card on LEFT -->
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="timeline-card">
+              <div class="timeline-role">BioDesign Innovation Intern &amp; Senior Capstone</div>
+              <div class="timeline-org">Carilion Clinic / Virginia Tech</div>
+              <p>Conducted a clinical needs assessment at one of Virginia's largest hospitals, identifying 40+ medical device design opportunities. Engineered two high-fidelity prototypes through full design controls — from RTM and DHF documentation through lab validation and human factors testing.</p>
+            </div>
+          </div>
+          <div class="timeline-center">
+            <div class="timeline-dot"></div>
+            <div class="timeline-badge">Jun 2022 – May 2023</div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Item 4: card on RIGHT -->
+        <div class="timeline-item">
+          <div class="timeline-empty"></div>
+          <div class="timeline-center">
+            <div class="timeline-dot"></div>
+            <div class="timeline-badge">Aug 2020 – May 2023</div>
+          </div>
+          <div class="timeline-right">
+            <div class="timeline-card">
+              <div class="timeline-role">President</div>
+              <div class="timeline-org">VT e-NABLE Chapter</div>
+              <p>Led 70+ volunteers in designing and fabricating free 3D-printed prosthetic devices for children with limb differences, enabling them to play, compete in sports, and live more independently. Grew chapter membership by 60% through outreach, industry partnerships, and fundraising.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interests -->
+  <section class="story-section">
+    <div class="container">
+      <h2 class="section-label">Outside the Office</h2>
+      <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.8; margin-bottom:2rem; max-width:600px;">I believe the best engineers and analysts are also curious, well-rounded humans. Here's what I'm into when I'm not building dashboards or designing devices.</p>
+      <div class="interests-list">
+
+        <!-- Travel -->
+        <div class="interest-row">
+          <div class="interest-imgs single">
+            <img src="images/IMG_3052.jpg" alt="Travel" />
+          </div>
+          <div class="interest-text-wrap">
+            <div class="interest-label">// 01</div>
+            <div class="interest-title">Travel</div>
+            <p class="interest-desc">Experiencing different cultures and places recharges me and sharpens my perspective. I find that the best ideas often come when you're somewhere completely unfamiliar — forced to observe, adapt, and stay curious.</p>
+          </div>
+        </div>
+
+        <!-- Photography -->
+        <div class="interest-row flip">
+          <div class="interest-imgs single">
+            <img src="images/IMG_2048.jpg" alt="Photography" />
+          </div>
+          <div class="interest-text-wrap">
+            <div class="interest-label">// 02</div>
+            <div class="interest-title">Photography</div>
+            <p class="interest-desc">Photography trains the same muscle as engineering — noticing what others miss. I love capturing candid moments and landscapes that tell a story without words. It's the one hobby where slowing down produces the best results.</p>
+          </div>
+        </div>
+
+        <!-- AI Prompt Engineering -->
+        <div class="interest-row">
+          <div class="interest-imgs single">
+            <img src="images/Me working.jpg" alt="Me working on AI" />
+          </div>
+          <div class="interest-text-wrap">
+            <div class="interest-label">// 03</div>
+            <div class="interest-title">AI Prompt Engineering</div>
+            <p class="interest-desc">I've been deeply invested in understanding how to get the most out of large language models — from writing precise prompts to building workflows that make AI genuinely useful. It's the intersection of language, logic, and creativity, and it's changing how I work every day.</p>
+          </div>
+        </div>
+
+        <!-- Volunteering -->
+        <div class="interest-row flip">
+          <div class="interest-imgs single">
+            <img src="images/IMG_1929.JPG" alt="Volunteering" />
+          </div>
+          <div class="interest-text-wrap">
+            <div class="interest-label">// 04</div>
+            <div class="interest-title">Volunteering</div>
+            <p class="interest-desc">From leading 70+ volunteers at VT e-NABLE to fabricate free prosthetics for kids, giving back has been a constant throughout my life. Building something that directly improves someone's quality of life is the most rewarding work I've done.</p>
+          </div>
+        </div>
+
+        <!-- Building Things -->
+        <div class="interest-row">
+          <div class="interest-imgs single">
+            <img src="images/Helmet main shot.PNG" alt="Building Things" style="object-position: center center;" />
+          </div>
+          <div class="interest-text-wrap">
+            <div class="interest-label">// 05</div>
+            <div class="interest-title">Building Things</div>
+            <p class="interest-desc">Whether it's a physical prototype or a software tool, I love the full arc of making something — from the first sketch to the moment it actually works. The problem-solving in between is where I'm most in my element.</p>
+          </div>
+        </div>
+
+        <!-- Continuous Learning -->
+        <div class="interest-row flip">
+          <div class="interest-imgs single">
+            <img src="images/internship.jpeg" alt="Continuous Learning" />
+          </div>
+          <div class="interest-text-wrap">
+            <div class="interest-label">// 06</div>
+            <div class="interest-title">Continuous Learning</div>
+            <p class="interest-desc">The fields I work in move fast. I stay current through certifications, courses, and a genuine love of learning — whether it's a new BI tool, a machine learning concept, or a research paper on neuroimaging. Staying sharp is a habit, not a chore.</p>
+          </div>
+        </div>
+
+        <!-- Teaching -->
+        <div class="interest-row">
+          <div class="interest-imgs single">
+            <img src="images/IMG_4496.jpeg" alt="Teaching" style="object-fit: contain; background: var(--surface);" />
+          </div>
+          <div class="interest-text-wrap">
+            <div class="interest-label">// 07</div>
+            <div class="interest-title">Teaching</div>
+            <p class="interest-desc">Breaking down complex ideas and helping others understand them is one of the most rewarding things I do. Whether it's mentoring peers, explaining technical concepts, or leading a team through something new, I find real satisfaction in the moment something clicks for someone else.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-bar">
+    <div class="container">
+      <h2>Let's Work Together</h2>
+      <p>I'm always open to new opportunities, collaborations, and conversations.</p>
+      <div class="cta-buttons">
+        <a href="index.html#contact" class="btn-primary">
+          <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Get In Touch
+        </a>
+        <a href="index.html#projects" class="btn-outline">
+          View My Projects <span class="sym">→</span>
+        </a>
       </div>
     </div>
   </section>
@@ -455,60 +605,6 @@
         localStorage.setItem('theme', dark ? 'dark' : 'light');
         applyTheme();
       };
-    })();
-    (function() {
-      var form = document.getElementById('contactForm');
-      var btn = document.getElementById('submitBtn');
-      var label = document.getElementById('submitLabel');
-      var feedback = document.getElementById('formFeedback');
-      var successState = document.getElementById('formSuccess');
-      var resetBtn = document.getElementById('resetBtn');
-
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        btn.disabled = true;
-        label.textContent = 'Sending...';
-        feedback.className = 'form-feedback';
-
-        fetch('https://formspree.io/f/mzdkkgkw', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
-        })
-        .then(function(res) {
-          if (res.ok) {
-            form.style.opacity = '0';
-            form.style.transition = 'opacity 0.25s ease';
-            setTimeout(function() {
-              form.style.display = 'none';
-              successState.classList.add('visible');
-            }, 250);
-            form.reset();
-          } else {
-            return res.json().then(function(data) {
-              throw new Error(data.errors ? data.errors.map(function(e) { return e.message; }).join(', ') : 'Something went wrong.');
-            });
-          }
-        })
-        .catch(function(err) {
-          feedback.textContent = err.message || 'Something went wrong. Please try emailing me directly.';
-          feedback.className = 'form-feedback error';
-          label.textContent = 'Send Message';
-          btn.disabled = false;
-        });
-      });
-
-      resetBtn.addEventListener('click', function() {
-        successState.classList.remove('visible');
-        form.style.display = '';
-        form.style.opacity = '0';
-        setTimeout(function() {
-          form.style.transition = 'opacity 0.25s ease';
-          form.style.opacity = '1';
-        }, 10);
-        label.textContent = 'Send Message';
-        btn.disabled = false;
-      });
     })();
   </script>
 </body>
