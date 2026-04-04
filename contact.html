@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Mateo McDermott</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand-blue: #009CDE;
+      --brand-blue-dark: #007ab3;
+      --brand-black: #000000;
+      --nav-btn: #000000;
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --text: #111111;
+      --text-muted: #6b6b6b;
+      --border: #d0d0cc;
+      --tag-bg: #e8e8e4;
+      --tag-text: #333;
+    }
+    html.dark {
+      --nav-btn: #1e1e1e;
+      --bg: #111111;
+      --surface: #1c1c1c;
+      --text: #f0f0ee;
+      --text-muted: #909090;
+      --border: #333333;
+      --tag-bg: #2a2a2a;
+      --tag-text: #ccc;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background-color: var(--bg); color: var(--text); transition: background-color 0.3s, color 0.3s; min-height: 100vh; overflow-x: hidden; }
+    @keyframes pageFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    body.page-enter { animation: pageFadeIn 0.35s ease both; }
+    body.page-exit { opacity: 0; transform: translateY(-6px); transition: opacity 0.2s ease, transform 0.2s ease; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+
+    /* ── Header ── */
+    header { padding: 2rem 0; }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .header-name h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 0.75rem; }
+    .header-name h1 span { color: var(--brand-blue); }
+    .header-subtitle { font-size: 0.9rem; color: var(--text-muted); letter-spacing: 0.01em; line-height: 1.5; }
+    .header-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; }
+    .mode-toggle button {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--surface); border: 2px solid var(--border);
+      cursor: pointer; padding: 0.4rem 0.75rem; border-radius: 999px;
+      color: var(--text); font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      font-family: inherit; transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .mode-toggle button:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+    .mode-toggle svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; pointer-events: none; }
+    .mode-toggle span { pointer-events: none; }
+    .header-links { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; }
+    .header-links a { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--brand-blue); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+    .header-links a:hover { color: var(--brand-blue-dark); }
+    .header-links svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+    .header-nav-bar { border-top: 1px solid var(--border); padding: 1.25rem 0; }
+    nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    nav a { display: inline-block; padding: 0.65rem 2rem; background: var(--nav-btn); color: #fff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
+    nav a:hover, nav a.active { background: var(--brand-blue); }
+
+    /* ── Contact hero ── */
+    .contact-hero { padding: 5rem 0 4rem; border-top: 1px solid var(--border); }
+    .contact-eyebrow { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--brand-blue); margin-bottom: 1rem; font-family: 'IBM Plex Mono', monospace; }
+    .contact-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
+    .contact-title span { color: var(--brand-blue); }
+    .contact-subtitle { font-size: 1rem; color: var(--text-muted); line-height: 1.8; max-width: 520px; }
+
+    /* ── Contact layout ── */
+    .contact-body { padding: 4rem 0; border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+
+    /* ── Info column ── */
+    .contact-info-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 1.5rem; font-family: 'IBM Plex Mono', monospace; }
+    .contact-links { display: flex; flex-direction: column; gap: 0; margin-bottom: 3rem; }
+    .contact-link-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    .contact-link-item:first-child { border-top: 1px solid var(--border); }
+    .contact-link-icon { width: 2rem; height: 2rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--brand-blue); }
+    .contact-link-icon svg { width: 1.25rem; height: 1.25rem; }
+    .contact-link-text { display: flex; flex-direction: column; gap: 0.1rem; }
+    .contact-link-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+    .contact-link-value { font-size: 0.88rem; color: var(--brand-blue); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+    a.contact-link-item:hover .contact-link-value { color: var(--brand-blue-dark); }
+    .contact-link-value.plain { color: var(--text); text-decoration: none; }
+
+
+    /* ── Form column ── */
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .form-group label { display: block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text); margin-bottom: 0.4rem; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select { width: 100%; background: transparent; border: 2px solid var(--border); padding: 0.8rem 1rem; font-size: 0.9rem; color: var(--text); font-family: inherit; outline: none; transition: border-color 0.2s; resize: none; appearance: none; }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--brand-blue); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-muted); }
+    .form-group select option { background: var(--surface); color: var(--text); }
+    .submit-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2.25rem; background: var(--brand-black); color: #fff; border: none; cursor: pointer; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: inherit; transition: background 0.2s; align-self: flex-start; }
+    .submit-btn:hover:not(:disabled) { background: var(--brand-blue); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .submit-btn svg { width: 1rem; height: 1rem; }
+    .form-feedback { font-size: 0.85rem; margin-top: 0.25rem; display: none; }
+    .form-feedback.error { color: #dc2626; display: block; }
+
+    /* ── Success animation ── */
+    .form-col { position: relative; }
+    .form-success-state {
+      display: none;
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 3rem 2rem; gap: 1rem;
+    }
+    .form-success-state.visible { display: flex; animation: successFadeIn 0.4s ease both; }
+    @keyframes successFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .success-check { width: 72px; height: 72px; margin-bottom: 0.5rem; }
+    .check-svg { width: 100%; height: 100%; overflow: visible; }
+
+    /* Circle draws in */
+    .check-circle {
+      stroke-dasharray: 157;
+      stroke-dashoffset: 157;
+      animation: drawCircle 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+    }
+    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
+
+    /* Tick draws in after circle */
+    .check-tick {
+      stroke-dasharray: 36;
+      stroke-dashoffset: 36;
+      animation: drawTick 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards;
+    }
+    @keyframes drawTick { to { stroke-dashoffset: 0; } }
+
+    .success-heading { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; animation: successFadeIn 0.4s ease 0.75s both; }
+    .success-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; max-width: 320px; animation: successFadeIn 0.4s ease 0.9s both; }
+    .success-reset {
+      margin-top: 0.5rem; background: none; border: 2px solid var(--border);
+      color: var(--text-muted); font-family: inherit; font-size: 0.72rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0.5rem 1.25rem; cursor: pointer; transition: border-color 0.2s, color 0.2s;
+      animation: successFadeIn 0.4s ease 1.05s both;
+    }
+    .success-reset:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; font-size: 0.78rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      body { overflow-x: hidden; }
+      .header-top { flex-direction: column; gap: 1rem; }
+      .header-meta { align-items: flex-start; }
+      .header-links { flex-direction: row; align-items: center; gap: 0.75rem; }
+      .header-links .link-label { display: none; }
+      .header-links svg { width: 1.4rem; height: 1.4rem; }
+      nav a { padding: 0.65rem 1.25rem; font-size: 0.75rem; }
+      .contact-hero { padding: 2.5rem 0 2rem; }
+      .contact-body { padding: 2.5rem 0; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .submit-btn { width: 100%; justify-content: center; box-sizing: border-box; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-top">
+        <div class="header-name">
+          <h1>Mateo <span>McDermott</span></h1>
+          <p class="header-subtitle">Biomedical Engineer &nbsp;|&nbsp; Senior Business Systems Analyst</p>
+          <p class="header-subtitle" style="margin-top:0.3rem;">Greater Boston, MA</p>
+        </div>
+        <div class="header-meta">
+          <div class="mode-toggle">
+            <button id="themeToggle">
+              <svg id="iconSun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <svg id="iconMoon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              <span id="modeLabel">Dark Mode</span>
+            </button>
+          </div>
+          <div class="header-links">
+            <a href="mailto:mateomcdermott@gmail.com">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <span class="link-label">mateomcdermott@gmail.com</span>
+            </a>
+            <a href="https://www.linkedin.com/in/mateomcdermott/" target="_blank" rel="noopener noreferrer">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <span class="link-label">LinkedIn</span>
+            </a>
+            <a href="https://github.com/mateomcdermott" target="_blank" rel="noopener noreferrer">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <span class="link-label">GitHub</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="header-nav-bar">
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="index.html#projects">Projects</a>
+          <a href="resume.html">Resume</a>
+          <a href="contact.html" class="active">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="contact-hero">
+    <div class="container">
+      <p class="contact-eyebrow">// Get in touch</p>
+      <h1 class="contact-title">Let's <span>Connect</span></h1>
+      <p class="contact-subtitle">I'm open to new opportunities, collaborations, and conversations. Whether you have a project in mind or just want to connect, I'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <section class="contact-body">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Info column -->
+        <div>
+          <p class="contact-info-label">// Direct channels</p>
+          <div class="contact-links">
+            <a href="mailto:mateomcdermott@gmail.com" class="contact-link-item">
+              <span class="contact-link-icon">
+                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span>
+              <span class="contact-link-text">
+                <span class="contact-link-label">Email</span>
+                <span class="contact-link-value">mateomcdermott@gmail.com</span>
+              </span>
+            </a>
+            <a href="https://www.linkedin.com/in/mateomcdermott/" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+              <span class="contact-link-icon">
+                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </span>
+              <span class="contact-link-text">
+                <span class="contact-link-label">LinkedIn</span>
+                <span class="contact-link-value">linkedin.com/in/mateomcdermott</span>
+              </span>
+            </a>
+            <a href="https://github.com/mateomcdermott" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+              <span class="contact-link-icon">
+                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </span>
+              <span class="contact-link-text">
+                <span class="contact-link-label">GitHub</span>
+                <span class="contact-link-value">github.com/mateomcdermott</span>
+              </span>
+            </a>
+            <div class="contact-link-item">
+              <span class="contact-link-icon">
+                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <span class="contact-link-text">
+                <span class="contact-link-label">Location</span>
+                <span class="contact-link-value plain">Greater Boston, MA</span>
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Form column -->
+        <div class="form-col" id="formCol">
+          <p class="contact-info-label">// Send a message</p>
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">Name</label>
+                <input type="text" id="fname" name="name" required placeholder="Your name" />
+              </div>
+              <div class="form-group">
+                <label for="femail">Email</label>
+                <input type="email" id="femail" name="email" required placeholder="your@email.com" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="fsubject">Subject</label>
+              <select id="fsubject" name="subject">
+                <option value="" disabled selected>Select a topic...</option>
+                <option value="Job Opportunity">Job Opportunity</option>
+                <option value="Collaboration">Collaboration</option>
+                <option value="Project Inquiry">Project Inquiry</option>
+                <option value="Just Saying Hi">Just Saying Hi</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fmessage">Message</label>
+              <textarea id="fmessage" name="message" rows="6" required placeholder="Tell me about your project or just say hi..."></textarea>
+            </div>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <span id="submitLabel">Send Message</span>
+            </button>
+            <p class="form-feedback" id="formFeedback"></p>
+          </form>
+
+          <!-- Success state -->
+          <div class="form-success-state" id="formSuccess" aria-live="polite">
+            <div class="success-check">
+              <svg class="check-svg" viewBox="0 0 52 52" fill="none">
+                <circle class="check-circle" cx="26" cy="26" r="24" stroke="var(--brand-blue)" stroke-width="2.5"/>
+                <polyline class="check-tick" points="14,27 22,35 38,18" stroke="var(--brand-blue)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="success-heading">Message Sent</p>
+            <p class="success-sub">Thanks for reaching out — I'll get back to you soon.</p>
+            <button class="success-reset" id="resetBtn">Send another message</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      &copy; 2026 Mateo McDermott &mdash; Building technology, solving problems, and loving every step of the journey.
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      document.body.classList.add('page-enter');
+      document.querySelectorAll('nav a').forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.classList.remove('page-enter');
+            document.body.classList.add('page-exit');
+            setTimeout(function() { window.location.href = href; }, 200);
+          });
+        }
+      });
+    })();
+
+    (function() {
+      var dark = localStorage.getItem('theme') === 'dark';
+      function applyTheme() {
+        document.documentElement.classList.toggle('dark', dark);
+        document.getElementById('iconSun').style.display = dark ? 'none' : '';
+        document.getElementById('iconMoon').style.display = dark ? '' : 'none';
+        document.getElementById('modeLabel').textContent = dark ? 'Light Mode' : 'Dark Mode';
+      }
+      applyTheme();
+      document.getElementById('themeToggle').onclick = function() {
+        dark = !dark;
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+        applyTheme();
+      };
+    })();
+
+    (function() {
+      var form = document.getElementById('contactForm');
+      var btn = document.getElementById('submitBtn');
+      var label = document.getElementById('submitLabel');
+      var feedback = document.getElementById('formFeedback');
+      var successState = document.getElementById('formSuccess');
+      var resetBtn = document.getElementById('resetBtn');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        btn.disabled = true;
+        label.textContent = 'Sending...';
+        feedback.className = 'form-feedback';
+
+        fetch('https://formspree.io/f/mzdkkgkw', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        })
+        .then(function(res) {
+          if (res.ok) {
+            form.style.opacity = '0';
+            form.style.transition = 'opacity 0.25s ease';
+            setTimeout(function() {
+              form.style.display = 'none';
+              successState.classList.add('visible');
+            }, 250);
+            form.reset();
+          } else {
+            return res.json().then(function(data) {
+              throw new Error(data.errors ? data.errors.map(function(e) { return e.message; }).join(', ') : 'Something went wrong.');
+            });
+          }
+        })
+        .catch(function(err) {
+          feedback.textContent = err.message || 'Something went wrong. Please try emailing me directly.';
+          feedback.className = 'form-feedback error';
+          label.textContent = 'Send Message';
+          btn.disabled = false;
+        });
+      });
+
+      resetBtn.addEventListener('click', function() {
+        successState.classList.remove('visible');
+        form.style.display = '';
+        form.style.opacity = '0';
+        setTimeout(function() {
+          form.style.transition = 'opacity 0.25s ease';
+          form.style.opacity = '1';
+        }, 10);
+        label.textContent = 'Send Message';
+        btn.disabled = false;
+      });
+    })();
+  </script>
+</body>
+</html>

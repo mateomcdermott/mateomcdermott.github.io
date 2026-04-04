@@ -121,14 +121,32 @@
     .link-icon svg { width: 1.75rem; height: 1.75rem; }
     .location-link { color: var(--text); cursor: default; }
     .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
     .form-group label { display: block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text); margin-bottom: 0.4rem; }
-    .form-group input, .form-group textarea { width: 100%; background: transparent; border: 2px solid var(--border); padding: 0.8rem 1rem; font-size: 0.9rem; color: var(--text); font-family: inherit; outline: none; transition: border-color 0.2s; resize: none; }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--brand-blue); }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: transparent; border: 2px solid var(--border); padding: 0.8rem 1rem; font-size: 0.9rem; color: var(--text); font-family: inherit; outline: none; transition: border-color 0.2s; resize: none; appearance: none; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--brand-blue); }
     .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
-    .submit-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--brand-black); color: #fff; border: none; cursor: pointer; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: inherit; transition: background 0.2s; align-self: flex-start; }
-    .submit-btn:hover { background: var(--brand-blue); }
+    .form-group select option { background: var(--surface); color: var(--text); }
+    .submit-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2.25rem; background: var(--brand-black); color: #fff; border: none; cursor: pointer; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: inherit; transition: background 0.2s; align-self: flex-start; }
+    .submit-btn:hover:not(:disabled) { background: var(--brand-blue); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .submit-btn svg { width: 1rem; height: 1rem; }
-    .form-success { font-size: 0.85rem; color: var(--brand-blue); display: none; margin-top: 0.5rem; }
+    .form-feedback { font-size: 0.85rem; margin-top: 0.25rem; display: none; }
+    .form-feedback.error { color: #dc2626; display: block; }
+    .form-col { position: relative; }
+    .form-success-state { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 2rem; gap: 1rem; }
+    .form-success-state.visible { display: flex; animation: successFadeIn 0.4s ease both; }
+    @keyframes successFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .success-check { width: 72px; height: 72px; margin-bottom: 0.5rem; }
+    .check-svg { width: 100%; height: 100%; overflow: visible; }
+    .check-circle { stroke-dasharray: 157; stroke-dashoffset: 157; animation: drawCircle 0.55s cubic-bezier(0.4,0,0.2,1) 0.1s forwards; }
+    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
+    .check-tick { stroke-dasharray: 36; stroke-dashoffset: 36; animation: drawTick 0.35s cubic-bezier(0.4,0,0.2,1) 0.6s forwards; }
+    @keyframes drawTick { to { stroke-dashoffset: 0; } }
+    .success-heading { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; animation: successFadeIn 0.4s ease 0.75s both; }
+    .success-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; max-width: 320px; animation: successFadeIn 0.4s ease 0.9s both; }
+    .success-reset { margin-top: 0.5rem; background: none; border: 2px solid var(--border); color: var(--text-muted); font-family: inherit; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.5rem 1.25rem; cursor: pointer; transition: border-color 0.2s, color 0.2s; animation: successFadeIn 0.4s ease 1.05s both; }
+    .success-reset:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
     footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; font-size: 0.78rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
     @media (max-width: 768px) {
       .container { padding: 0 1.25rem; }
@@ -140,6 +158,8 @@
       .header-name h1 { font-size: 2.5rem; }
       .header-subtitle { font-size: 0.82rem; white-space: normal; word-break: break-word; }
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .submit-btn { width: 100%; justify-content: center; box-sizing: border-box; }
       .resume-grid { grid-template-columns: 1fr; }
       .resume-col-wide { grid-column: span 1; }
       nav a { padding: 0.65rem 1.25rem; font-size: 0.75rem; }
@@ -189,7 +209,7 @@
           <a href="about.html">About</a>
           <a href="#projects">Projects</a>
           <a href="resume.html">Resume</a>
-          <a href="#contact">Contact</a>
+          <a href="contact.html">Contact</a>
         </nav>
       </div>
     </div>
@@ -389,25 +409,54 @@
             </div>
           </div>
         </div>
-        <form class="contact-form" id="contactForm">
-          <div class="form-group">
-            <label for="fname">Name</label>
-            <input type="text" id="fname" name="name" required placeholder="Your name" />
+        <div class="form-col" id="formCol">
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">Name</label>
+                <input type="text" id="fname" name="name" required placeholder="Your name" />
+              </div>
+              <div class="form-group">
+                <label for="femail">Email</label>
+                <input type="email" id="femail" name="email" required placeholder="your@email.com" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="fsubject">Subject</label>
+              <select id="fsubject" name="subject">
+                <option value="" disabled selected>Select a topic...</option>
+                <option value="Job Opportunity">Job Opportunity</option>
+                <option value="Collaboration">Collaboration</option>
+                <option value="Project Inquiry">Project Inquiry</option>
+                <option value="Just Saying Hi">Just Saying Hi</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fmessage">Message</label>
+              <textarea id="fmessage" name="message" rows="5" required placeholder="Tell me about your project or just say hi..."></textarea>
+            </div>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <span id="submitLabel">Send Message</span>
+            </button>
+            <p class="form-feedback" id="formFeedback"></p>
+          </form>
+
+          <!-- Success state -->
+          <div class="form-success-state" id="formSuccess" aria-live="polite">
+            <div class="success-check">
+              <svg class="check-svg" viewBox="0 0 52 52" fill="none">
+                <circle class="check-circle" cx="26" cy="26" r="24" stroke="var(--brand-blue)" stroke-width="2.5"/>
+                <polyline class="check-tick" points="14,27 22,35 38,18" stroke="var(--brand-blue)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="success-heading">Message Sent</p>
+            <p class="success-sub">Thanks for reaching out — I'll get back to you soon.</p>
+            <button class="success-reset" id="resetBtn">Send another message</button>
           </div>
-          <div class="form-group">
-            <label for="femail">Email</label>
-            <input type="email" id="femail" name="email" required placeholder="your@email.com" />
-          </div>
-          <div class="form-group">
-            <label for="fmessage">Message</label>
-            <textarea id="fmessage" name="message" rows="5" required placeholder="Tell me about your project or just say hi..."></textarea>
-          </div>
-          <button type="submit" class="submit-btn" id="submitBtn">
-            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            <span id="submitLabel">Send Message</span>
-          </button>
-          <p class="form-success" id="formSuccess">Thanks! I'll get back to you soon.</p>
-        </form>
+        </div>
       </div>
     </div>
   </section>
@@ -447,16 +496,60 @@
         localStorage.setItem('theme', dark ? 'dark' : 'light');
         applyTheme();
       };
-      document.getElementById('contactForm').onsubmit = function(e) {
+    })();
+    (function() {
+      var form = document.getElementById('contactForm');
+      var btn = document.getElementById('submitBtn');
+      var label = document.getElementById('submitLabel');
+      var feedback = document.getElementById('formFeedback');
+      var successState = document.getElementById('formSuccess');
+      var resetBtn = document.getElementById('resetBtn');
+
+      form.addEventListener('submit', function(e) {
         e.preventDefault();
-        document.getElementById('submitLabel').textContent = 'Message Sent!';
-        document.getElementById('formSuccess').style.display = 'block';
-        this.reset();
+        btn.disabled = true;
+        label.textContent = 'Sending...';
+        feedback.className = 'form-feedback';
+
+        fetch('https://formspree.io/f/mzdkkgkw', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        })
+        .then(function(res) {
+          if (res.ok) {
+            form.style.opacity = '0';
+            form.style.transition = 'opacity 0.25s ease';
+            setTimeout(function() {
+              form.style.display = 'none';
+              successState.classList.add('visible');
+            }, 250);
+            form.reset();
+          } else {
+            return res.json().then(function(data) {
+              throw new Error(data.errors ? data.errors.map(function(e) { return e.message; }).join(', ') : 'Something went wrong.');
+            });
+          }
+        })
+        .catch(function(err) {
+          feedback.textContent = err.message || 'Something went wrong. Please try emailing me directly.';
+          feedback.className = 'form-feedback error';
+          label.textContent = 'Send Message';
+          btn.disabled = false;
+        });
+      });
+
+      resetBtn.addEventListener('click', function() {
+        successState.classList.remove('visible');
+        form.style.display = '';
+        form.style.opacity = '0';
         setTimeout(function() {
-          document.getElementById('submitLabel').textContent = 'Send Message';
-          document.getElementById('formSuccess').style.display = 'none';
-        }, 4000);
-      };
+          form.style.transition = 'opacity 0.25s ease';
+          form.style.opacity = '1';
+        }, 10);
+        label.textContent = 'Send Message';
+        btn.disabled = false;
+      });
     })();
   </script>
 </body>
