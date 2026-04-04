@@ -144,9 +144,10 @@
     /* ── Mobile ── */
     @media (max-width: 768px) {
       body { overflow-x: hidden; }
-      .topbar-inner { padding: 0 1.25rem; }
-      .topbar-name { font-size: 0.82rem; }
-      .topbar-nav a { padding: 0.3rem 0.45rem; font-size: 0.65rem; letter-spacing: 0.04em; }
+      .topbar-inner { padding: 0 1rem; gap: 0.5rem; }
+      .topbar-name { font-size: 0.8rem; }
+      .topbar-right { gap: 0.5rem; }
+      .topbar-nav a { padding: 0.3rem 0.35rem; font-size: 0.62rem; letter-spacing: 0.03em; }
       .topbar-nav a.hide-mobile { display: none; }
       .contact-hero { padding: 2.5rem 0 2rem; }
       .contact-body { padding: 2.5rem 0; }
@@ -162,7 +163,7 @@
       <a href="index.html" class="topbar-name">Mateo <span>McDermott</span></a>
       <div class="topbar-right">
         <nav class="topbar-nav">
-          <a href="index.html">Home</a>
+          <a href="index.html" class="hide-mobile">Home</a>
           <a href="about.html">About</a>
           <a href="index.html#projects" class="hide-mobile">Projects</a>
           <a href="resume.html">Resume</a>

@@ -155,9 +155,10 @@
       body { overflow-x: hidden; }
       .sym { display: none; }
       .container { padding: 0 1.25rem; }
-      .topbar-inner { padding: 0 1.25rem; }
-      .topbar-name { font-size: 0.82rem; }
-      .topbar-nav a { padding: 0.3rem 0.45rem; font-size: 0.65rem; letter-spacing: 0.04em; }
+      .topbar-inner { padding: 0 1rem; gap: 0.5rem; }
+      .topbar-name { font-size: 0.8rem; }
+      .topbar-right { gap: 0.5rem; }
+      .topbar-nav a { padding: 0.3rem 0.35rem; font-size: 0.62rem; letter-spacing: 0.03em; }
       .topbar-nav a.hide-mobile { display: none; }
 
       /* Header */
@@ -172,7 +173,7 @@
       .about-hero { padding: 2rem 0; }
       .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
       .hero-img-wrap { max-width: 100%; }
-      .hero-img-wrap img { aspect-ratio: 4/3; object-position: top; }
+      .hero-img-wrap img { aspect-ratio: 3/4; object-position: top; max-height: 70vh; }
       .hero-img-accent { display: none; }
       .hero-stats { flex-wrap: wrap; gap: 1rem 2rem; }
 
@@ -212,7 +213,7 @@
       <a href="index.html" class="topbar-name">Mateo <span>McDermott</span></a>
       <div class="topbar-right">
         <nav class="topbar-nav">
-          <a href="index.html">Home</a>
+          <a href="index.html" class="hide-mobile">Home</a>
           <a href="about.html" class="active">About</a>
           <a href="index.html#projects" class="hide-mobile">Projects</a>
           <a href="resume.html">Resume</a>
@@ -438,7 +439,7 @@
         <!-- Building Things -->
         <div class="interest-row">
           <div class="interest-imgs single">
-            <img src="images/Helmet main shot.PNG" alt="Building Things" />
+            <img src="images/Helmet main shot.PNG" alt="Building Things" style="object-position: center center;" />
           </div>
           <div class="interest-text-wrap">
             <div class="interest-label">// 05</div>
