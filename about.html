@@ -150,8 +150,10 @@
 
     footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; font-size: 0.78rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
 
+    .sym { display: inline; }
     @media (max-width: 768px) {
       body { overflow-x: hidden; }
+      .sym { display: none; }
       .container { padding: 0 1.25rem; }
       .topbar-inner { padding: 0 1.25rem; }
       .topbar-name { font-size: 0.82rem; }
@@ -329,7 +331,6 @@
               <div class="timeline-org">MIND Lab, Virginia Tech</div>
               <div class="ep-periods">
                 <div class="ep-row">
-                  <span class="ep-label ep-return">↩ Called back</span>
                   <span class="ep-chip active">Jun 2025 – Present</span>
                 </div>
                 <div class="ep-sep">invited back</div>
@@ -485,7 +486,7 @@
           Get In Touch
         </a>
         <a href="index.html#projects" class="btn-outline">
-          View My Projects →
+          View My Projects <span class="sym">→</span>
         </a>
       </div>
     </div>
