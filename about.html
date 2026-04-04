@@ -40,33 +40,18 @@
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
 
-    /* ── Header ── */
-    header { padding: 2rem 0; }
-    .header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem; }
-    .header-name h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 0.75rem; }
-    .header-name h1 span { color: var(--brand-blue); }
-    .header-subtitle { font-size: 0.9rem; color: var(--text-muted); letter-spacing: 0.01em; line-height: 1.5; }
-    .header-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; }
-    .mode-toggle button {
-      display: flex; align-items: center; gap: 0.5rem;
-      background: var(--surface); border: 2px solid var(--border);
-      cursor: pointer; padding: 0.4rem 0.75rem; border-radius: 999px;
-      color: var(--text); font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      font-family: inherit; transition: border-color 0.2s, color 0.2s;
-      white-space: nowrap;
-    }
-    .mode-toggle button:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
-    .mode-toggle svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; pointer-events: none; }
-    .mode-toggle span { pointer-events: none; }
-    .header-links { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; }
-    .header-links a { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--brand-blue); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
-    .header-links a:hover { color: var(--brand-blue-dark); }
-    .header-links svg { width: 1rem; height: 1rem; flex-shrink: 0; }
-    .header-nav-bar { border-top: 1px solid var(--border); padding: 1.25rem 0; }
-    nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    nav a { display: inline-block; padding: 0.65rem 2rem; background: var(--nav-btn); color: #fff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
-    nav a:hover, nav a.active { background: var(--brand-blue); }
+    /* ── Top bar ── */
+    .topbar { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .topbar-inner { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .topbar-name { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; color: var(--text); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+    .topbar-name span { color: var(--brand-blue); }
+    .topbar-right { display: flex; align-items: center; gap: 1rem; }
+    .topbar-nav { display: flex; align-items: center; }
+    .topbar-nav a { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); padding: 0.35rem 0.7rem; text-decoration: none; transition: color 0.2s; }
+    .topbar-nav a:hover, .topbar-nav a.active { color: var(--brand-blue); }
+    .topbar-toggle { background: none; border: none; cursor: pointer; color: var(--text); padding: 0.35rem; display: flex; align-items: center; transition: color 0.2s; }
+    .topbar-toggle:hover { color: var(--brand-blue); }
+    .topbar-toggle svg { width: 1.1rem; height: 1.1rem; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; pointer-events: none; }
 
     /* ── Hero ── */
     .about-hero { padding: 5rem 0 4rem; border-top: 1px solid var(--border); }
@@ -168,6 +153,10 @@
     @media (max-width: 768px) {
       body { overflow-x: hidden; }
       .container { padding: 0 1.25rem; }
+      .topbar-inner { padding: 0 1.25rem; }
+      .topbar-name { font-size: 0.82rem; }
+      .topbar-nav a { padding: 0.3rem 0.45rem; font-size: 0.65rem; letter-spacing: 0.04em; }
+      .topbar-nav a.hide-mobile { display: none; }
 
       /* Header */
       .header-top { flex-direction: column; gap: 1rem; }
@@ -216,46 +205,21 @@
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <div class="header-top">
-        <div class="header-name">
-          <h1>Mateo <span>McDermott</span></h1>
-          <p class="header-subtitle">Biomedical Engineer &nbsp;|&nbsp; Senior Business Systems Analyst</p>
-          <p class="header-subtitle" style="margin-top:0.3rem;">Greater Boston, MA</p>
-        </div>
-        <div class="header-meta">
-          <div class="mode-toggle">
-            <button id="themeToggle">
-              <svg id="iconSun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-              <svg id="iconMoon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-              <span id="modeLabel">Dark Mode</span>
-            </button>
-          </div>
-          <div class="header-links">
-            <a href="mailto:mateomcdermott@gmail.com">
-              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              <span class="link-label">mateomcdermott@gmail.com</span>
-            </a>
-            <a href="https://www.linkedin.com/in/mateomcdermott/" target="_blank" rel="noopener noreferrer">
-              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              <span class="link-label">LinkedIn</span>
-            </a>
-            <a href="https://github.com/projects" target="_blank" rel="noopener noreferrer">
-              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              <span class="link-label">GitHub</span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="header-nav-bar">
-        <nav>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="topbar-name">Mateo <span>McDermott</span></a>
+      <div class="topbar-right">
+        <nav class="topbar-nav">
           <a href="index.html">Home</a>
           <a href="about.html" class="active">About</a>
-          <a href="index.html#projects">Projects</a>
+          <a href="index.html#projects" class="hide-mobile">Projects</a>
           <a href="resume.html">Resume</a>
           <a href="contact.html">Contact</a>
         </nav>
+        <button class="topbar-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg id="iconSun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg id="iconMoon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
       </div>
     </div>
   </header>
@@ -554,7 +518,6 @@
         document.documentElement.classList.toggle('dark', dark);
         document.getElementById('iconSun').style.display = dark ? 'none' : '';
         document.getElementById('iconMoon').style.display = dark ? '' : 'none';
-        document.getElementById('modeLabel').textContent = dark ? 'Light Mode' : 'Dark Mode';
       }
       applyTheme();
       document.getElementById('themeToggle').onclick = function() {
