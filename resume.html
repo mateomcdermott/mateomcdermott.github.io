@@ -86,9 +86,9 @@
     /* ── Summary ── */
     .summary-text { font-size: 0.97rem; color: var(--text-muted); line-height: 1.85; max-width: 860px; }
 
-    /* ── Skills ── */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.5rem; }
-    .skill-tag { padding: 0.45rem 0.9rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; background: var(--tag-bg); color: var(--tag-text); border-left: 3px solid var(--brand-blue); }
+    /* ── Tags ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; margin-bottom: 0.75rem; }
+    .tag { padding: 0.2rem 0.7rem; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: var(--tag-bg); color: var(--brand-blue); border: 1px solid var(--brand-blue); }
 
     /* ── Experience ── */
     .exp-item { display: flex; align-items: flex-start; gap: 1.25rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
@@ -231,34 +231,6 @@
     </div>
   </section>
 
-  <!-- Skills -->
-  <section class="resume-section">
-    <div class="container">
-      <h2 class="section-label">
-        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-        Skills
-      </h2>
-      <div class="skills-grid">
-        <div class="skill-tag">3D-CAD / SolidWorks</div>
-        <div class="skill-tag">3D Printing</div>
-        <div class="skill-tag">Geometric Dimensioning &amp; Tolerancing (GD&amp;T)</div>
-        <div class="skill-tag">Root Cause Analysis</div>
-        <div class="skill-tag">Data Visualization (Power BI)</div>
-        <div class="skill-tag">MATLAB</div>
-        <div class="skill-tag">Python</div>
-        <div class="skill-tag">Generative / Agentic AI</div>
-        <div class="skill-tag">MS Office</div>
-        <div class="skill-tag">Clinical Requirements Analysis</div>
-        <div class="skill-tag">Project Management</div>
-        <div class="skill-tag">Quality Assurance (QA)</div>
-        <div class="skill-tag">Product Design &amp; Rapid Prototyping</div>
-        <div class="skill-tag">Agile / Scrum</div>
-        <div class="skill-tag">Business Analysis</div>
-        <div class="skill-tag">Technical Writing</div>
-      </div>
-    </div>
-  </section>
-
   <!-- Experience -->
   <section class="resume-section" id="experience">
     <div class="container">
@@ -284,6 +256,7 @@
             <li>Builds Tier 1 and Tier 2 go-live support dashboards from production ticket data (using Power BI, Excel, and Jira), giving executives real-time issue tracking and data-driven insights reducing post-go-live defects.</li>
             <li>Develops weekly executive-level status reports in PowerPoint by collaborating with 5 workstreams, clearly communicating the program's operational progress and task completion status to client &amp; internal leadership.</li>
           </ul>
+          <div class="tags"><span class="tag">Business Analysis</span><span class="tag">Quality Assurance</span><span class="tag">Agile / Scrum</span><span class="tag">Power BI</span><span class="tag">Jira</span><span class="tag">Technical Writing</span><span class="tag">Project Management</span><span class="tag">Salesforce</span><span class="tag">SAP</span></div>
           <a class="cert-btn" href="https://www.accenture.com" target="_blank" rel="noopener noreferrer">Visit website &#8599;</a>
         </div>
       </div>
@@ -306,6 +279,7 @@
             <li>Programmes a Visual Basic Application (VBA) script to automate 3D digital measurement data collection (position, orientation vectors, 2D layout coordinates) from SolidWorks. Used measurements to co-localize sensor data with a surface representation of patients' skull in MATLAB/Python.</li>
             <li>Recommends alterations to development and design to improve quality of 3D printed products via offering 3D printing procedures (Cura/Ultimaker), GD&amp;T, and material selection guidance.</li>
           </ul>
+          <div class="tags"><span class="tag">SolidWorks (CAD)</span><span class="tag">3D Printing</span><span class="tag">GD&amp;T</span><span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">VBA</span><span class="tag">V&amp;V</span><span class="tag">Medical Device Design</span><span class="tag">ISO 13485</span><span class="tag">Neurodevelopment Research</span></div>
           <a class="cert-btn" href="https://fbri.vtc.vt.edu/research/labs/howell-mind-lab.html" target="_blank" rel="noopener noreferrer">Visit website &#8599;</a>
         </div>
       </div>
@@ -328,6 +302,7 @@
             <li>Created a Requirements Traceability Matrix (RTM) linking user needs, design inputs, and verification &amp; validation methods (V&amp;V), and results as they apply to ISO standards such as ISO 19993 and ISO 13485.</li>
             <li>Shadowed several operating room (OR) procedures including an Aortic Stent Placement using stents made by Gore Medical and Boston Scientific. Also observed a Sleeve Gastrectomy conducted with DaVinci Robotic Surgical Systems.</li>
           </ul>
+          <div class="tags"><span class="tag">Medical Device Design</span><span class="tag">V&amp;V</span><span class="tag">ISO 13485</span><span class="tag">Clinical Research</span><span class="tag">Product Development</span><span class="tag">Human Factors Engineering</span><span class="tag">Technical Writing</span></div>
           <a class="cert-btn" href="https://biodesign.vt.edu" target="_blank" rel="noopener noreferrer">Visit website &#8599;</a>
         </div>
       </div>
@@ -348,6 +323,7 @@
             <li>Directed weekly student general body meetings for all 70 members, led CAD and 3D printing workshops, and managed end-to-end manufacturing of 6 assistive devices for a 10-year-old boy with a congenital limb deficiency.</li>
             <li>Led campus-wide outreach initiatives, increasing club membership by 60% over 2 semesters through professional development offerings, industry partnerships, and effective fundraising events.</li>
           </ul>
+          <div class="tags"><span class="tag">3D Printing</span><span class="tag">SolidWorks (CAD)</span><span class="tag">Leadership</span><span class="tag">Community Outreach</span><span class="tag">Prosthetic Development</span><span class="tag">Team Management</span></div>
           <a class="cert-btn" href="https://enablingthefuture.org" target="_blank" rel="noopener noreferrer">Visit website &#8599;</a>
         </div>
       </div>
@@ -364,7 +340,7 @@
       <div class="patent-item">
         <div class="patent-header">
           <div class="patent-name">Helmet System and Kit Patent</div>
-          <div class="patent-number">U.S. Patent Application No.: 19/086,230</div>
+          <a class="patent-number" href="https://patents.google.com/patent/US20250295341A1/en" target="_blank" rel="noopener noreferrer" style="color:var(--brand-blue);text-decoration:underline;text-underline-offset:3px;">U.S. Patent Application No.: 19/086,230</a>
         </div>
         <p class="patent-desc">Co-inventor and Computer Aided Designer of the helmet used for neuroimaging infants.</p>
       </div>
