@@ -214,6 +214,17 @@
     .success-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; max-width: 320px; animation: successFadeIn 0.4s ease 0.9s both; }
     .success-reset { margin-top: 0.5rem; background: none; border: 2px solid var(--border); color: var(--text-muted); font-family: inherit; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.5rem 1.25rem; cursor: pointer; transition: border-color 0.2s, color 0.2s; animation: successFadeIn 0.4s ease 1.05s both; }
     .success-reset:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+    .contact-info-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 1.5rem; font-family: 'IBM Plex Mono', monospace; margin-top: 3rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 0; }
+    .contact-link-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    .contact-link-item:first-child { border-top: 1px solid var(--border); }
+    .contact-link-icon { width: 2rem; height: 2rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--brand-blue); }
+    .contact-link-icon svg { width: 1.25rem; height: 1.25rem; }
+    .contact-link-text { display: flex; flex-direction: column; gap: 0.1rem; }
+    .contact-link-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+    .contact-link-value { font-size: 0.88rem; color: var(--brand-blue); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+    a.contact-link-item:hover .contact-link-value { color: var(--brand-blue-dark); }
+    .contact-link-value.plain { color: var(--text); text-decoration: none; }
 
     footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; font-size: 0.78rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
 
@@ -698,6 +709,47 @@
           <p class="success-heading">Message Sent</p>
           <p class="success-sub">Thanks for reaching out — I'll get back to you soon.</p>
           <button class="success-reset" id="resetBtn">Send another message</button>
+        </div>
+
+        <!-- Direct channels -->
+        <p class="contact-info-label">// Direct channels</p>
+        <div class="contact-links">
+          <a href="mailto:mateomcdermott@gmail.com" class="contact-link-item">
+            <span class="contact-link-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </span>
+            <span class="contact-link-text">
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-value">mateomcdermott@gmail.com</span>
+            </span>
+          </a>
+          <a href="https://www.linkedin.com/in/mateomcdermott/" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+            <span class="contact-link-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </span>
+            <span class="contact-link-text">
+              <span class="contact-link-label">LinkedIn</span>
+              <span class="contact-link-value">linkedin.com/in/mateomcdermott</span>
+            </span>
+          </a>
+          <a href="https://github.com/mateomcdermott" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+            <span class="contact-link-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </span>
+            <span class="contact-link-text">
+              <span class="contact-link-label">GitHub</span>
+              <span class="contact-link-value">github.com/mateomcdermott</span>
+            </span>
+          </a>
+          <div class="contact-link-item">
+            <span class="contact-link-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <span class="contact-link-text">
+              <span class="contact-link-label">Location</span>
+              <span class="contact-link-value plain">Greater Boston, MA</span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
