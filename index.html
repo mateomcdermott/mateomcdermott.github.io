@@ -85,7 +85,8 @@
     .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s; }
     .carousel-dot.active { background: var(--brand-blue); transform: scale(1.3); }
     .project-year { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; font-family: 'IBM Plex Mono', monospace; }
-    .project-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
+    .project-thumb { width: 100%; height: 200px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); margin: 0.75rem 0 1.25rem; display: block; }
+    .project-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0; line-height: 1.3; }
     .project-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; }
     /* ── Patent / IP ── */
     .patent-item { border-left: 2px solid var(--brand-blue); padding-left: 1.25rem; margin-bottom: 1.25rem; }
@@ -178,12 +179,41 @@
     /* ── CTA ── */
     .cta-bar { padding: 4rem 0; border-top: 1px solid var(--border); text-align: center; }
     .cta-bar h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; }
-    .cta-bar p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2rem; }
+    .cta-bar p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0; }
     .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
     .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--brand-blue); color: #fff; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
     .btn-primary:hover { background: var(--brand-blue-dark); }
     .btn-outline { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: transparent; color: var(--text); border: 2px solid var(--border); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: border-color 0.2s, color 0.2s; }
     .btn-outline:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+
+    /* ── Contact form ── */
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .form-group label { display: block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text); margin-bottom: 0.4rem; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: transparent; border: 2px solid var(--border); padding: 0.8rem 1rem; font-size: 0.9rem; color: var(--text); font-family: inherit; outline: none; transition: border-color 0.2s; resize: none; appearance: none; box-sizing: border-box; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--brand-blue); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
+    .form-group select option { background: var(--surface); color: var(--text); }
+    .submit-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2.25rem; background: var(--brand-black); color: #fff; border: none; cursor: pointer; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: inherit; transition: background 0.2s; align-self: flex-start; }
+    .submit-btn:hover:not(:disabled) { background: var(--brand-blue); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .submit-btn svg { width: 1rem; height: 1rem; }
+    .form-feedback { font-size: 0.85rem; margin-top: 0.25rem; display: none; }
+    .form-feedback.error { color: #dc2626; display: block; }
+    .form-col { position: relative; max-width: 640px; margin: 0 auto; }
+    .form-success-state { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 2rem; gap: 1rem; }
+    .form-success-state.visible { display: flex; animation: successFadeIn 0.4s ease both; }
+    @keyframes successFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .success-check { width: 72px; height: 72px; margin-bottom: 0.5rem; }
+    .check-svg { width: 100%; height: 100%; overflow: visible; }
+    .check-circle { stroke-dasharray: 157; stroke-dashoffset: 157; animation: drawCircle 0.55s cubic-bezier(0.4,0,0.2,1) 0.1s forwards; }
+    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
+    .check-tick { stroke-dasharray: 36; stroke-dashoffset: 36; animation: drawTick 0.35s cubic-bezier(0.4,0,0.2,1) 0.6s forwards; }
+    @keyframes drawTick { to { stroke-dashoffset: 0; } }
+    .success-heading { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; animation: successFadeIn 0.4s ease 0.75s both; }
+    .success-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; max-width: 320px; animation: successFadeIn 0.4s ease 0.9s both; }
+    .success-reset { margin-top: 0.5rem; background: none; border: 2px solid var(--border); color: var(--text-muted); font-family: inherit; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.5rem 1.25rem; cursor: pointer; transition: border-color 0.2s, color 0.2s; animation: successFadeIn 0.4s ease 1.05s both; }
+    .success-reset:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
 
     footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; font-size: 0.78rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
 
@@ -200,6 +230,8 @@
       .carousel-btn.disabled { opacity: 0.3 !important; }
       .carousel-dots { margin-top: 0; }
       .carousel-wrap { padding-bottom: 1rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .submit-btn { width: 100%; justify-content: center; box-sizing: border-box; }
       .container { padding: 0 1.25rem; }
       .topbar-inner { padding: 0 1rem; gap: 0.5rem; }
       .topbar-name { font-size: 0.95rem; }
@@ -328,36 +360,36 @@
         <div class="carousel-track-outer">
           <div class="projects-grid" id="carouselTrack">
             <div class="project-card">
-              <div class="project-year">2026</div>
               <h3 class="project-title">OPM-MEG Infant Helmet</h3>
+              <img class="project-thumb" src="images/IMG_4032.jpg" alt="OPM-MEG Infant Helmet">
               <p class="project-desc">A wearable neuroimaging helmet enabling the first-ever OPM-MEG data collection in awake, behaving infants.</p>
               <div class="tags"><span class="tag">SolidWorks (CAD)</span><span class="tag">Neurodevelopment Research</span><span class="tag">Medical Device Product Design</span><span class="tag">V&amp;V</span><span class="tag">Python</span><span class="tag">VBA</span><span class="tag">GD&amp;T</span></div>
               <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
             </div>
             <div class="project-card">
-              <div class="project-year">2026</div>
               <h3 class="project-title">Financial Dashboard</h3>
+              <img class="project-thumb" style="object-fit: contain; background: var(--surface);" src="images/Power BI Dashboard.png" alt="Financial Dashboard">
               <p class="project-desc">Built a personal Power BI dashboard consolidating credit card, Venmo, and bank data for budget vs. actuals tracking — fully customizable, no subscription required.</p>
               <div class="tags"><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Data Analytics</span><span class="tag">Data Visualization</span></div>
               <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
             </div>
             <div class="project-card">
-              <div class="project-year">2023</div>
               <h3 class="project-title">Low-Cost Pediatric Prosthetics</h3>
+              <img class="project-thumb" src="images/3D print image placeholder.png" alt="e-NABLE Prosthetics">
               <p class="project-desc">As President of the VT e-NABLE chapter, led 70+ volunteers fabricating free 3D-printed prosthetics for children with limb differences — helping kids play, compete in sports, and live more independently.</p>
               <div class="tags"><span class="tag">Prosthetic Development</span><span class="tag">Leadership</span><span class="tag">Team Management</span><span class="tag">Community Outreach</span><span class="tag">Human Factors Engineering</span></div>
               <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
             </div>
             <div class="project-card">
-              <div class="project-year">2025</div>
               <h3 class="project-title">3D Print Monitor</h3>
+              <img class="project-thumb" src="images/3D Print.webp" alt="3D Print Monitor">
               <p class="project-desc">A real-time defect detection system using Claude's Vision API to analyze a live webcam feed mid-print. Defects trigger an Arduino-controlled servo to automatically kill the print — accessible remotely via ngrok from any device.</p>
               <div class="tags"><span class="tag">Claude Vision API</span><span class="tag">Computer Vision</span><span class="tag">Arduino</span><span class="tag">Node.js</span><span class="tag">Vite</span><span class="tag">JavaScript</span><span class="tag">Hardware Integration</span></div>
               <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
             </div>
             <div class="project-card">
-              <div class="project-year">2015 – Present</div>
               <h3 class="project-title">Photography</h3>
+              <img class="project-thumb" src="images/IMG_2942.jpg" alt="Photography">
               <p class="project-desc">10+ years behind the lens with a Nikon D5500, specializing in landscapes, travel, astrophotography, and abstracts. Each shot is an exercise in patience, composition, and seeing the world differently.</p>
               <div class="tags"><span class="tag">Landscape</span><span class="tag">Astrophotography</span><span class="tag">Travel</span><span class="tag">Abstract</span><span class="tag">Nikon D5500</span></div>
               <a href="#" class="project-link">View project details <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -614,14 +646,59 @@
     <div class="container">
       <h2>Let's Work Together</h2>
       <p>I'm always open to new opportunities, collaborations, and conversations.</p>
-      <div class="cta-buttons">
-        <a href="index.html#contact" class="btn-primary">
-          <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Get In Touch
-        </a>
-        <a href="index.html#projects" class="btn-outline">
-          View My Projects <span class="sym">→</span>
-        </a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="story-section" id="contact">
+    <div class="container">
+      <h2 class="section-label">Get In Touch</h2>
+      <div class="form-col" id="formCol">
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Name</label>
+              <input type="text" id="fname" name="name" required placeholder="Your name" />
+            </div>
+            <div class="form-group">
+              <label for="femail">Email</label>
+              <input type="email" id="femail" name="email" required placeholder="your@email.com" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fsubject">Subject</label>
+            <select id="fsubject" name="subject">
+              <option value="" disabled selected>Select a topic...</option>
+              <option value="Job Opportunity">Job Opportunity</option>
+              <option value="Collaboration">Collaboration</option>
+              <option value="Project Inquiry">Project Inquiry</option>
+              <option value="Just Saying Hi">Just Saying Hi</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fmessage">Message</label>
+            <textarea id="fmessage" name="message" rows="6" required placeholder="Tell me about your project or just say hi..."></textarea>
+          </div>
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span id="submitLabel">Send Message</span>
+          </button>
+          <p class="form-feedback" id="formFeedback"></p>
+        </form>
+        <!-- Success state -->
+        <div class="form-success-state" id="formSuccess" aria-live="polite">
+          <div class="success-check">
+            <svg class="check-svg" viewBox="0 0 52 52" fill="none">
+              <circle class="check-circle" cx="26" cy="26" r="24" stroke="var(--brand-blue)" stroke-width="2.5"/>
+              <polyline class="check-tick" points="14,27 22,35 38,18" stroke="var(--brand-blue)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="success-heading">Message Sent</p>
+          <p class="success-sub">Thanks for reaching out — I'll get back to you soon.</p>
+          <button class="success-reset" id="resetBtn">Send another message</button>
+        </div>
       </div>
     </div>
   </section>
@@ -749,6 +826,62 @@
       window.addEventListener('resize', function() { goTo(Math.min(current, maxIndex())); });
 
       goTo(0);
+    })();
+
+    (function() {
+      var form = document.getElementById('contactForm');
+      var btn = document.getElementById('submitBtn');
+      var label = document.getElementById('submitLabel');
+      var feedback = document.getElementById('formFeedback');
+      var successState = document.getElementById('formSuccess');
+      var resetBtn = document.getElementById('resetBtn');
+      if (!form) return;
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        btn.disabled = true;
+        label.textContent = 'Sending...';
+        feedback.className = 'form-feedback';
+
+        fetch('https://formspree.io/f/mzdkkgkw', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        })
+        .then(function(res) {
+          if (res.ok) {
+            form.style.opacity = '0';
+            form.style.transition = 'opacity 0.25s ease';
+            setTimeout(function() {
+              form.style.display = 'none';
+              successState.classList.add('visible');
+            }, 250);
+            form.reset();
+          } else {
+            return res.json().then(function(data) {
+              throw new Error(data.errors ? data.errors.map(function(e) { return e.message; }).join(', ') : 'Something went wrong.');
+            });
+          }
+        })
+        .catch(function(err) {
+          feedback.textContent = err.message || 'Something went wrong. Please try emailing me directly.';
+          feedback.className = 'form-feedback error';
+          label.textContent = 'Send Message';
+          btn.disabled = false;
+        });
+      });
+
+      resetBtn.addEventListener('click', function() {
+        successState.classList.remove('visible');
+        form.style.display = '';
+        form.style.opacity = '0';
+        setTimeout(function() {
+          form.style.transition = 'opacity 0.25s ease';
+          form.style.opacity = '1';
+        }, 10);
+        label.textContent = 'Send Message';
+        btn.disabled = false;
+      });
     })();
   </script>
 </body>
